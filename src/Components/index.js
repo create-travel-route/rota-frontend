@@ -1,0 +1,1 @@
+// export komponentAdı from './komponentAdı';
