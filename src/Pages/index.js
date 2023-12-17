@@ -1,1 +1,3 @@
-// export sayfaAdı from './sayfaAdı';
+import Homepage from './Homepage';
+
+export { Homepage };

@@ -1,1 +1,3 @@
-// export komponentAdı from './komponentAdı';
+import LanguageSwitcher from './LanguageSwitcher';
+
+export { LanguageSwitcher };

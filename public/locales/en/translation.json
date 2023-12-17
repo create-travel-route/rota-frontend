@@ -1,3 +1,23 @@
 {
-  "project.name": "Route"
+  "project.name": "Route",
+  "project.description": "We always make our customers happy by providing as many choises as possible",
+  "page.login": "LogIn",
+  "page.signup": "Sign Up",
+  "language.tr": "Türkçe",
+  "language.en": "English",
+  "navbar.login": "Log In",
+  "footer.subscribe": "Subscribe to our newsletter to create travel routes",
+  "footer.about": "About",
+  "footer.about.aboutUs": "About Us",
+  "footer.about.features": "Features",
+  "footer.about.news": "News",
+  "footer.about.menu": "Menu",
+  "footer.company": "Company",
+  "footer.company.whyHP": "Why Us?",
+  "footer.company.partners": "Partner with Us",
+  "footer.company.faq": "FAQ",
+  "footer.company.blog": "Blog",
+  "footer.support": "Support",
+  "footer.support.account": "Account",
+  "footer.support.supportCenter": "Support Center"
 }

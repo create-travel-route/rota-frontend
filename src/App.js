@@ -1,9 +1,16 @@
-import { useTranslation } from 'react-i18next';
-import './App.css';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './Layout/Layout';
+import { Homepage } from './Pages';
 
-function App() {
-  const { t } = useTranslation();
-  return <div className="App">{t('project.name')}</div>;
-}
+const App = () => {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+      </Routes>
+    </Layout>
+  );
+};
 
 export default App;

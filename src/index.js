@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import { CacheProvider } from '@emotion/react';
-import createTheme from './Theme/index';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import tr from 'date-fns/locale/tr';
 import createCache from '@emotion/cache';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './Utils/i18n';
+import createTheme from './Theme';
 
 import App from './App';
 
 const theme = createTheme();
+
 const cache = createCache({
   key: 'css',
   prepend: true
@@ -22,13 +27,14 @@ root.render(
   <CacheProvider value={cache}>
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <React.StrictMode>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<App />} />
-            </Routes>
-          </BrowserRouter>
-        </React.StrictMode>
+        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={tr}>
+          <React.StrictMode>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </React.StrictMode>
+        </LocalizationProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>
   </CacheProvider>

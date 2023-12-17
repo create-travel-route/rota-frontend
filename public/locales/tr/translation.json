@@ -1,3 +1,25 @@
 {
-  "project.name": "Rota"
+  "project.name": "Rota",
+  "project.description": "Mümkün olduğunca çok seçenek sunarak müşterilerimizi her zaman mutlu ediyoruz",
+  "page.login": "Giriş Yap",
+  "page.signup": "Kayıt Ol",
+  "language.tr": "Türkçe",
+  "language.en": "English",
+  "navbar.login": "Giriş Yap",
+  "footer.subscribe": "Yeni seyahat rotaları oluşturmak için bültenimize abone olun",
+  "footer.about": "Hakkımızda",
+  "footer.about.aboutUs": "Hakkımızda",
+  "footer.about.features": "Özellikler",
+  "footer.about.news": "Haberler",
+  "footer.about.menu": "Menü",
+  "footer.company": "Şirket",
+  "footer.company.whyHP": "Neden Biz",
+  "footer.company.partners": "Bizimle Ortak Olun",
+  "footer.company.faq": "SSS",
+  "footer.company.blog": "Blog",
+  "footer.support": "Destek",
+  "footer.support.account": "Hesap",
+  "footer.support.supportCenter": "Destek Merkezi",
+  "footer.support.feedback": "Geri Bildirim",
+  "footer.support.contact": "Bize Ulaşın"
 }
