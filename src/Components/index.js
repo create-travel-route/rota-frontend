@@ -1,3 +1,4 @@
 import LanguageSwitcher from './LanguageSwitcher';
+import Input from './Input';
 
-export { LanguageSwitcher };
+export { LanguageSwitcher, Input };
