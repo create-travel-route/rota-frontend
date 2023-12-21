@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.mainButton {
+  background-color: #26428b;
+}
+
+.secondaryButton {
+  color: #26428b;
+}
+
+.tertiaryButton {
+  color: #26428b;
+}
