@@ -13,6 +13,7 @@ import './Utils/i18n';
 import createTheme from './Theme';
 
 import App from './App';
+import RequestProvider from './Contexts/RequestContext';
 
 const theme = createTheme();
 
@@ -28,11 +29,13 @@ root.render(
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={tr}>
-          <React.StrictMode>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </React.StrictMode>
+          <RequestProvider>
+            <React.StrictMode>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </React.StrictMode>
+          </RequestProvider>
         </LocalizationProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

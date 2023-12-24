@@ -19,5 +19,12 @@
   "footer.company.blog": "Blog",
   "footer.support": "Support",
   "footer.support.account": "Account",
-  "footer.support.supportCenter": "Support Center"
+  "footer.support.supportCenter": "Support Center",
+  "input.departurePoint": "Departure Point",
+  "input.arrivalPoint": "Arrival Point",
+  "input.budget": "Budget",
+  "button.createRoute": "Create route",
+  "validation.departurePoint.required": "Selecting a location from the 'Departure Point' field is required!",
+  "validation.arrivalPoint.required": "Selecting a location from the 'Arrival Point' field is required!",
+  "validation.minValue.budget": "Minimum of {{ min }} budget is required!"
 }
