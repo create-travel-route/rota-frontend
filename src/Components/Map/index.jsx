@@ -20,7 +20,7 @@ const Map = ({ coordinates, setCoordinates, setBounds, formik }) => {
       position="relative">
       <Box position="absolute" left={0} top={0} height="100%" width="100%">
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_KEY }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_KEY }}
           defaultCenter={center}
           defaultZoom={13}
           onChange={(e) => {
