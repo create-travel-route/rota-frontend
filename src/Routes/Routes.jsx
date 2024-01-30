@@ -1,8 +1,3 @@
 import { Homepage } from '../Pages';
 
-export const routes = [
-  {
-    path: '/',
-    element: Homepage
-  }
-];
+export const routes = [];
