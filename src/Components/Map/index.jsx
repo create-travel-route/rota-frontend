@@ -54,9 +54,7 @@ const Map = ({ coordinates, setCoordinates, setBounds, formik }) => {
             onBlur={formik.handleBlur('budget')}
             error={formik.touched.budget && Boolean(formik.errors.budget)}
           />
-          <MainButton variant="contained" onClick={formik.handleSubmit}>
-            {t('button.createRoute')}
-          </MainButton>
+          <MainButton onClick={formik.handleSubmit}>{t('button.createRoute')}</MainButton>
         </Stack>
       </Box>
     </Box>

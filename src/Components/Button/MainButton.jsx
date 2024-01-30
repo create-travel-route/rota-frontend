@@ -5,7 +5,6 @@ export default function MainButton({
   disabled = false,
   type,
   size,
-  variant,
   color,
   onClick,
   children,
@@ -19,7 +18,7 @@ export default function MainButton({
       type={type}
       size={size}
       color={color}
-      variant={variant}
+      variant="contained"
       onClick={onClick}
       fullWidth
       {...props}>
