@@ -1,39 +1,8 @@
-import React, { useState } from 'react';
-import { Box } from '@mui/material';
-import { Map } from '../../Components';
-import { useFormik } from 'formik';
+import React from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import '../../App.css';
-import { basicFormSchema } from '../../Schemas';
-
-function Homepage() {
-  const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState(null);
-
-  const formik = useFormik({
-    initialValues: {
-      departurePoint: '',
-      arrivalPoint: '',
-      budget: ''
-    },
-    validationSchema: basicFormSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    }
-  });
-
-  return (
-    <Box sx={{ flexGrow: 1, m: 2 }}>
-      <Map
-        coordinates={coordinates}
-        setCoordinates={setCoordinates}
-        setBounds={setBounds}
-        formik={formik}
-      />
-    </Box>
-  );
-}
+import { Register } from '../../Components';
 
 const App = () => {
   return (
@@ -169,4 +138,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Register;
