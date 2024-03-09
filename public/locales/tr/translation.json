@@ -21,5 +21,12 @@
   "footer.support.account": "Hesap",
   "footer.support.supportCenter": "Destek Merkezi",
   "footer.support.feedback": "Geri Bildirim",
-  "footer.support.contact": "Bize Ulaşın"
+  "footer.support.contact": "Bize Ulaşın",
+  "input.departurePoint": "Nereden",
+  "input.arrivalPoint": "Nereye",
+  "input.budget": "Bütçe",
+  "button.createRoute": "Rota oluştur",
+  "validation.departurePoint.required": "'Nereden' alanından bir konum seçilmesi zorunludur!",
+  "validation.arrivalPoint.required": "'Nereye' alanından bir konum seçilmesi zorunludur!",
+  "validation.minValue.budget": "'Bütçe' alanına en az {{ max }} girilebilir!"
 }
