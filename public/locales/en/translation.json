@@ -26,5 +26,18 @@
   "button.createRoute": "Create route",
   "validation.departurePoint.required": "Selecting a location from the 'Departure Point' field is required!",
   "validation.arrivalPoint.required": "Selecting a location from the 'Arrival Point' field is required!",
-  "validation.minValue.budget": "Minimum of {{ min }} budget is required!"
+  "validation.minValue.budget": "Minimum of {{ min }} budget is required!",
+  "validation.mail.required": "'Email Address' field is required!",
+  "validation.email.invalid": "'Email Address' must be mail format!",
+  "validation.password.required": "'Password' field is required!",
+  "login.mail":"Mail Address",
+  "login.input.mail":"example@example.com",
+  "login.input.password":"Password",
+  "login.password":"Password",
+  "login.buttonText":"Login",
+  "login.RememberMe":"Remember me",
+  "login.ForgotPassword":"Forgot Password",
+  "login.DonthaveAccount":"Don't have an account ?",
+  "login.Signup":"Signup"
+
 }

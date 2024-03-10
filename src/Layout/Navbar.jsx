@@ -15,14 +15,14 @@ import {
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { LanguageSwitcher } from '../Components';
 import { useTranslation } from 'react-i18next';
-
+import { useNavigate } from 'react-router-dom';
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleOpenNavMenu = (event) => {
@@ -150,7 +150,9 @@ function Navbar() {
                 </Menu>
               </>
             ) : (
-              <Button color="inherit">{t('navbar.login')}</Button>
+              <Button color="inherit" onClick={() => navigate('/Login')}>
+                {t('navbar.login')}
+              </Button>
             )}
           </Box>
         </Toolbar>

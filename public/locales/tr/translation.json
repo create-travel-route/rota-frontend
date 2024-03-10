@@ -28,5 +28,18 @@
   "button.createRoute": "Rota oluştur",
   "validation.departurePoint.required": "'Nereden' alanından bir konum seçilmesi zorunludur!",
   "validation.arrivalPoint.required": "'Nereye' alanından bir konum seçilmesi zorunludur!",
-  "validation.minValue.budget": "'Bütçe' alanına en az {{ max }} girilebilir!"
+  "validation.minValue.budget": "'Bütçe' alanına en az {{ max }} girilebilir!",
+  "validation.mail.required": "'E-posta Adresi' alanına giriş yapılması zorunludur!",
+  "validation.email.invalid": "'E-posta Adresi' alanı mail formatına uygun olmalıdır!",
+  "validation.password.required": "'Şifre' alanına giriş yapılması zorunludur!",
+  "login.mail":"Mail adresi",
+  "login.input.mail":"example@example.com",
+  "login.input.password":"Şifre",
+  "login.password":"Şifre",
+  "login.buttonText":"Giriş yap",
+  "login.RememberMe":"Beni hatırla",
+  "login.ForgotPassword":"Şifremi Unuttum",
+  "login.DonthaveAccount":"Hesabınız mı yok ?",
+  "login.Signup":"Kayıt Ol"
+
 }

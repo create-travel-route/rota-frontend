@@ -18,3 +18,12 @@ export const basicFormSchema = yup.object().shape({
 
   budget: yup.number().min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />)
 });
+
+export const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email(<Trans i18nKey="validation.email.invalid" />)
+    .required(<Trans i18nKey="validation.mail.required" />),
+
+  password: yup.string().required(<Trans i18nKey="validation.password.required" />)
+});
