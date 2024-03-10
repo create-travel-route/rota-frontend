@@ -1,140 +1,131 @@
-import React from 'react';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import '../../App.css';
-import { Register } from '../../Components';
+import React, { useEffect, useState } from 'react';
+import {
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Alert,
+  Typography
+} from '@mui/material';
+import Input from '../Input';
+import MainButton from '../Button/MainButton';
+import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import { registerSchema } from '../../Schemas';
 
-const App = () => {
+const Register = ({ handleClose, open }) => {
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    if (!open) {
+      formik.resetForm();
+    }
+  }, [open]);
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      passwordAgain: '',
+      isHost: false
+    },
+    validationSchema: registerSchema,
+    onSubmit: async (values, bag) => {
+      console.log(values);
+    }
+  });
+
   return (
-    <div className="container">
-      <div className="brand-box">
-        <h1>Rota Form</h1>
-      </div>
-
-      <div className="rota-form">
-        <Formik
-          initialValues={{
-            email: '',
-            firstName: '',
-            lastName: '',
-            password: '',
-            passwordAgain: '',
-            isHost: false
-          }}
-          validationSchema={Yup.object({
-            firstName: Yup.string().required('First name is required'),
-            lastName: Yup.string().required('Last name is required'),
-            email: Yup.string().email().required('Emailis required'),
-            isHost: Yup.bool().oneOf([true], 'You must accept the Terms and Conditions.')
-          })}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
-            console.log(values);
-            setTimeout(() => {
-              setSubmitting(false);
-              resetForm();
-            }, 2000);
-          }}>
-          {({
-            values,
-            touched,
-            errors,
-            dirty,
-            isSubmitting,
-            handleSubmit,
-            handleReset,
-            handleChange
-          }) => (
-            <form className="rota-form" onSubmit={handleSubmit}>
-              <div className="input-group">
-                <div className="input-group-item">
-                  <label htmlFor="firstname">First Name</label>
-                  <input
-                    id="firstname"
-                    type="text"
-                    placeholder="Ayşegül"
-                    className="input"
-                    value={values.firstname}
-                    onChange={handleChange}
-                  />
-                  {errors.firstname && touched.firstname && (
-                    <div className="input-feedback">{errors.firstname}</div>
-                  )}
-
-                  <label htmlFor="lastName">Last Name</label>
-                  <input
-                    id="lastName"
-                    type="text"
-                    placeholder="GENÇEL"
-                    className="input"
-                    value={values.lastName}
-                    onChange={handleChange}
-                  />
-                  {errors.lastName && touched.lastName && (
-                    <div className="input-feedback">{errors.lastName}</div>
-                  )}
-                </div>
-              </div>
-
-              <div className="input-group">
-                <div className="input-group-item">
-                  <label htmlFor="email" className="topMargin">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    placeholder="aysegulgencel0@gmail.com"
-                    className="input"
-                    value={values.email}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="input-group-item">
-                  <label htmlFor="password" className="topMargin">
-                    Password
-                  </label>
-                  <input
-                    id="password"
-                    type="password"
-                    placeholder="*****"
-                    className="input"
-                    value={values.password}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="passwordAgain" className="topMargin">
-                    Password Again
-                  </label>
-                  <input
-                    id="passwordAgain"
-                    type="password"
-                    placeholder="*****"
-                    className="input"
-                    value={values.passwordAgain}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              <div className="checkbox topMargin">
-                <input id="isHost" type="checkbox" value={values.isHost} onChange={handleChange} />
-                <label htmlFor="isHost" className="checkbox-label">
-                  I Agree.
-                </label>
-              </div>
-              {errors.isHost && <div className="input-feedback">{errors.isHost}</div>}
-
-              <button
-                type="submit"
-                disabled={!dirty || isSubmitting}
-                style={{ backgroundColor: '#0000FF', color: 'white' }}>
-                Sing Up
-              </button>
-            </form>
-          )}
-        </Formik>
-      </div>
-    </div>
+    <>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>
+          <Typography
+            sx={{
+              color: 'header.main',
+              fontWeight: 'bold',
+              fontSize: '32px'
+            }}
+            gutterBottom>
+            {t('page.signup')}
+          </Typography>
+        </DialogTitle>
+        <form onSubmit={formik.handleSubmit}>
+          <DialogContent>
+            <Grid container spacing={2}>
+              {formik.errors.general && (
+                <Grid item xs={12}>
+                  <Alert severity="error">{formik.errors.general}</Alert>
+                </Grid>
+              )}
+              <Grid item xs={6}>
+                <Input
+                  label={t('signup.input.firstName')}
+                  onChange={formik.handleChange('firstName')}
+                  value={formik.values.firstName}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  label={t('signup.input.lastName')}
+                  onChange={formik.handleChange('lastName')}
+                  value={formik.values.lastName}
+                  error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Input
+                  label={t('signup.input.mail')}
+                  onChange={formik.handleChange('email')}
+                  value={formik.values.email}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  label={t('signup.input.password')}
+                  onChange={formik.handleChange('password')}
+                  value={formik.values.password}
+                  type="password"
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  inputProps={{ maxLength: 25 }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  label={t('signup.input.passwordAgain')}
+                  onChange={formik.handleChange('passwordAgain')}
+                  value={formik.values.passwordAgain}
+                  type="password"
+                  error={formik.touched.passwordAgain && Boolean(formik.errors.passwordAgain)}
+                  inputProps={{ maxLength: 25 }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formik.values.isHost}
+                      name="toggle"
+                      onChange={formik.handleChange('isHost')}
+                    />
+                  }
+                  label={[t('signup.input.wantedToHost')]}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <MainButton type="submit">{t('signup.button.title')}</MainButton>
+              </Grid>
+            </Grid>
+          </DialogContent>
+        </form>
+      </Dialog>
+    </>
   );
 };
 
