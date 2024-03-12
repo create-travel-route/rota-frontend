@@ -25,5 +25,7 @@ export const loginSchema = yup.object().shape({
     .email(<Trans i18nKey="validation.email.invalid" />)
     .required(<Trans i18nKey="validation.mail.required" />),
 
-  password: yup.string().required(<Trans i18nKey="validation.password.required" />)
+  password: yup.string().required(<Trans i18nKey="validation.password.required" />),
+
+  rememberMe: yup.boolean()
 });

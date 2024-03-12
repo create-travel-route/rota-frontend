@@ -37,9 +37,9 @@
   "login.input.password":"Şifre",
   "login.password":"Şifre",
   "login.buttonText":"Giriş yap",
-  "login.RememberMe":"Beni hatırla",
-  "login.ForgotPassword":"Şifremi Unuttum",
-  "login.DonthaveAccount":"Hesabınız mı yok ?",
-  "login.Signup":"Kayıt Ol"
+  "login.rememberMe":"Beni hatırla",
+  "login.forgotPassword":"Şifremi Unuttum",
+  "login.donthaveAccount":"Hesabınız mı yok ?",
+  "login.signup":"Kayıt Ol"
 
 }

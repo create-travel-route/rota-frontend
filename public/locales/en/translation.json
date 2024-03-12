@@ -31,13 +31,11 @@
   "validation.email.invalid": "'Email Address' must be mail format!",
   "validation.password.required": "'Password' field is required!",
   "login.mail":"Mail Address",
-  "login.input.mail":"example@example.com",
-  "login.input.password":"Password",
   "login.password":"Password",
   "login.buttonText":"Login",
-  "login.RememberMe":"Remember me",
-  "login.ForgotPassword":"Forgot Password",
-  "login.DonthaveAccount":"Don't have an account ?",
-  "login.Signup":"Signup"
+  "login.rememberMe":"Remember me",
+  "login.forgotPassword":"Forgot Password",
+  "login.donthaveAccount":"Don't have an account ?",
+  "login.signup":"Signup"
 
 }
