@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import { Homepage } from './Pages';
 import { routes } from './Routes/Routes';
-
 const App = () => {
   return (
     <Layout>

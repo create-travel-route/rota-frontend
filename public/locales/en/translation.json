@@ -32,6 +32,13 @@
   "signup.input.wantedToHost": "I want to become a host. ",
   "signup.button.detail": "More Details",
   "signup.button.title": "Sign Up For Free",
+  "login.mail":"Mail Address",
+  "login.password":"Password",
+  "login.buttonText":"Login",
+  "login.rememberMe":"Remember me",
+  "login.forgotPassword":"Forgot Password",
+  "login.donthaveAccount":"Don't have an account ?",
+  "login.signup":"Signup"
   "button.createRoute": "Create route",
   "validation.departurePoint.required": "Selecting a location from the 'Departure Point' field is required!",
   "validation.arrivalPoint.required": "Selecting a location from the 'Arrival Point' field is required!",

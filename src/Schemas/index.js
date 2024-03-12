@@ -42,3 +42,14 @@ export const registerSchema = yup.object().shape({
     .oneOf([yup.ref('password')], <Trans i18nKey="validation.passwordsDontMatch" />)
     .required(<Trans i18nKey="validation.passwordAgain.required" />)
 });
+
+export const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email(<Trans i18nKey="validation.email.invalid" />)
+    .required(<Trans i18nKey="validation.mail.required" />),
+
+  password: yup.string().required(<Trans i18nKey="validation.password.required" />),
+
+  rememberMe: yup.boolean()
+});
