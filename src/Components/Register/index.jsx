@@ -47,7 +47,8 @@ const Register = ({ handleClose, open }) => {
             sx={{
               color: 'header.main',
               fontWeight: 'bold',
-              fontSize: '32px'
+              fontSize: '32px',
+              textAlign: 'center'
             }}
             gutterBottom>
             {t('page.signup')}

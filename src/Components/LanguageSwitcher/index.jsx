@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { MenuItem, Box, Menu, IconButton, Stack, Typography } from '@mui/material';
+import { MenuItem, Box, Menu, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const languages = [
   { value: 'tr', label: 'Türkçe', code: 'TR' },
-  { value: 'en', label: 'English', code: 'US' }
+  { value: 'en', label: 'English', code: 'EN' }
 ];
 
 const LanguageSwitcher = () => {
@@ -33,21 +33,16 @@ const LanguageSwitcher = () => {
 
   return (
     <Box>
-      <IconButton
+      <Typography
+        sx={{ cursor: 'pointer' }}
         aria-label="more"
         id="long-button"
         aria-controls={open ? 'long-menu' : undefined}
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleClick}>
-        <img
-          loading="lazy"
-          width="30"
-          srcSet={`https://flagcdn.com/w40/${selectedLanguage.code.toLowerCase()}.png 2x`}
-          src={`https://flagcdn.com/w20/${selectedLanguage.code.toLowerCase()}.png`}
-          alt=""
-        />
-      </IconButton>
+        {selectedLanguage.code}
+      </Typography>
       <Menu
         id="long-menu"
         MenuListProps={{
@@ -59,14 +54,7 @@ const LanguageSwitcher = () => {
         {languages.map((option) => (
           <MenuItem key={option.value} onClick={(event) => handleMenuItemClick(event, option)}>
             <Stack direction="row" spacing={2}>
-              <img
-                loading="lazy"
-                width="30"
-                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                alt=""
-              />
-              <Typography>{option.label}</Typography>
+              {option.code} - <Typography>{option.label}</Typography>
             </Stack>
           </MenuItem>
         ))}

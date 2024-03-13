@@ -14,6 +14,20 @@ const createComponents = ({ palette }) => {
           borderRadius: 5
         }
       }
+    },
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          width: '100%'
+        },
+        textPrimary: {
+          padding: 0,
+          minWidth: 0,
+          '&:hover': {
+            backgroundColor: 'transparent'
+          }
+        }
+      }
     }
   };
 };

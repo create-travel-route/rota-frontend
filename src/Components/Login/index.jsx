@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Box,
   Stack,
   Typography,
   Checkbox,
   FormControlLabel,
-  Grid,
   Dialog,
-  DialogTitle,
   DialogContent,
-  Alert
+  Box
 } from '@mui/material';
 import Input from '../Input';
 import MainButton from '../Button/MainButton';
@@ -17,9 +14,18 @@ import TertiaryButton from '../Button/TertiaryButton';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { loginSchema } from '../../Schemas';
+import Register from '../Register';
+import styled from '@emotion/styled';
+
+const Item = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  flexGrow: 1
+}));
 
 function Login({ handleClose, open }) {
   const { t } = useTranslation();
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -39,8 +45,15 @@ function Login({ handleClose, open }) {
     }
   });
 
+  const registerOpen = () => {
+    setIsSignupOpen(true);
+    handleClose();
+  };
+
   return (
     <>
+      <Register handleClose={() => setIsSignupOpen(false)} open={isSignupOpen} />
+
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <Typography
@@ -85,15 +98,17 @@ function Login({ handleClose, open }) {
               />
 
               <MainButton type="submit">{t('login.buttonText')}</MainButton>
-              <Stack direction="row" justifyContent="space-between" alignItems="center" mt={3}>
-                <TertiaryButton>{t('login.forgotPassword')}</TertiaryButton>
-                <Stack direction="row">
-                  <Typography>{t('login.donthaveAccount')}</Typography>
-                  <TertiaryButton>{t('login.signup')}</TertiaryButton>
-                </Stack>
-              </Stack>
             </Stack>
           </form>
+          <Stack direction="row" justifyContent="space-around" alignItems="center" spacing={2}>
+            <Item>
+              <TertiaryButton>{t('login.forgotPassword')}</TertiaryButton>
+            </Item>
+            <Item>
+              {t('login.donthaveAccount')}
+              <TertiaryButton onClick={registerOpen}>{t('login.signup')}</TertiaryButton>
+            </Item>
+          </Stack>
         </DialogContent>
       </Dialog>
     </>
@@ -101,73 +116,3 @@ function Login({ handleClose, open }) {
 }
 
 export default Login;
-
-/* <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      height="90vh"
-      width="100vw"
-      position="relative">
-      <Box
-        p={3}
-        borderRadius={1}
-        m={4}
-        bgcolor="white"
-        mt="10vh"
-        width="60vh"
-        boxShadow={2}
-        zIndex={1}>
-        <Typography
-          sx={{
-            color: 'header.main',
-            fontWeight: 'bold',
-            fontSize: '32px',
-            textAlign: 'center'
-          }}
-          gutterBottom>
-          {t('page.login')}
-        </Typography>
-        <form onSubmit={formik.handleSubmit}>
-          <Stack direction="column" spacing={2}>
-            <Input
-              placeholder={t('login.mail')}
-              onChange={formik.handleChange('email')}
-              value={formik.values.email}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              required
-            />
-
-            <Input
-              placeholder={t('login.password')}
-              onChange={formik.handleChange('password')}
-              value={formik.values.password}
-              type="password"
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              inputProps={{ maxLength: 25 }}
-              required
-            />
-
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formik.values.rememberMe}
-                  name="toggle"
-                  onChange={formik.handleChange('rememberMe')}
-                />
-              }
-              label={[t('login.rememberMe')]}
-            />
-
-            <MainButton type="submit">{t('login.buttonText')}</MainButton>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" mt={3}>
-              <TertiaryButton>{t('login.forgotPassword')}</TertiaryButton>
-              <Stack direction="row">
-                <Typography>{t('login.donthaveAccount')}</Typography>
-                <TertiaryButton>{t('login.signup')}</TertiaryButton>
-              </Stack>
-            </Stack>
-          </Stack>
-        </form>
-      </Box>
-    </Box>*/

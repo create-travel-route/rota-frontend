@@ -1,5 +1,16 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import MUIButton from '@mui/material/Button';
+import styled from '@emotion/styled';
+
+const StyledButton = styled(MUIButton)(
+  ({ color, variant }) => `
+  background-color: ${color};
+  border-color: ${color};
+  font-weight: ${variant === 'contained' || variant === 'outlined' ? '600' : 'none'};
+  text-decoration: ${variant === 'text' ? 'underline' : 'none'};
+  text-transform: capitalize;
+`
+);
 
 export default function TertiaryButton({
   disabled = false,
@@ -12,9 +23,9 @@ export default function TertiaryButton({
   ...props
 }) {
   return (
-    <Button
+    <StyledButton
       disabled={disabled}
-      sx={sx}
+      sx={{ p: 0, ...sx }}
       type={type}
       size={size}
       color={color}
@@ -23,6 +34,6 @@ export default function TertiaryButton({
       fullWidth
       {...props}>
       {children}
-    </Button>
+    </StyledButton>
   );
 }
