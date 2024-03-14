@@ -44,6 +44,8 @@
   "login.donthaveAccount": "Hesabınız yok mu?",
   "login.signup": "Kayıt Ol",
   "button.createRoute": "Rota oluştur",
+  "errorPopup.title": "Uyarı",
+  "errorPopup.button.title": "Tamam",
   "validation.departurePoint.required": "'Nereden' alanından bir konum seçilmesi zorunludur!",
   "validation.arrivalPoint.required": "'Nereye' alanından bir konum seçilmesi zorunludur!",
   "validation.minValue.budget": "'Bütçe' alanına en az {{ max }} girilebilir!",

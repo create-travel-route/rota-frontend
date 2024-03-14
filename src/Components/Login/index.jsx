@@ -16,6 +16,7 @@ import { useFormik } from 'formik';
 import { loginSchema } from '../../Schemas';
 import Register from '../Register';
 import styled from '@emotion/styled';
+import ErrorPopup from '../ErrorPopup';
 
 const Item = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -66,20 +67,23 @@ function Login({ handleClose, open }) {
             gutterBottom>
             {t('page.login')}
           </Typography>
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} noValidate>
             <Stack direction="column" spacing={2}>
               <Input
-                placeholder={t('login.mail')}
+                label={t('login.mail')}
+                placeholder="info@mail.com"
                 onChange={formik.handleChange('email')}
                 value={formik.values.email}
+                onBlur={formik.handleBlur}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 required
               />
 
               <Input
-                placeholder={t('login.password')}
+                label={t('login.password')}
                 onChange={formik.handleChange('password')}
                 value={formik.values.password}
+                onBlur={formik.handleBlur}
                 type="password"
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 inputProps={{ maxLength: 25 }}
@@ -111,6 +115,7 @@ function Login({ handleClose, open }) {
           </Stack>
         </DialogContent>
       </Dialog>
+      <ErrorPopup formik={formik} />
     </>
   );
 }

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import { Map } from '../../Components';
+import { ErrorPopup, Map } from '../../Components';
 import { useFormik } from 'formik';
-
 import { basicFormSchema } from '../../Schemas';
 
 function Homepage() {
@@ -22,14 +21,17 @@ function Homepage() {
   });
 
   return (
-    <Box sx={{ flexGrow: 1, m: 2 }}>
-      <Map
-        coordinates={coordinates}
-        setCoordinates={setCoordinates}
-        setBounds={setBounds}
-        formik={formik}
-      />
-    </Box>
+    <>
+      <Box sx={{ flexGrow: 1, m: 2 }}>
+        <Map
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+          setBounds={setBounds}
+          formik={formik}
+        />
+      </Box>
+      <ErrorPopup formik={formik} />
+    </>
   );
 }
 

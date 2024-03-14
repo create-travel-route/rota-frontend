@@ -40,6 +40,8 @@
   "login.donthaveAccount": "Don't have an account ?",
   "login.signup": "Signup",
   "button.createRoute": "Create route",
+  "errorPopup.title": "Warning",
+  "errorPopup.button.title": "Okey",
   "validation.departurePoint.required": "Selecting a location from the 'Departure Point' field is required!",
   "validation.arrivalPoint.required": "Selecting a location from the 'Arrival Point' field is required!",
   "validation.minValue.budget": "Minimum of {{ min }} budget is required!",
