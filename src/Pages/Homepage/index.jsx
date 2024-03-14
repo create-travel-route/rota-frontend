@@ -15,8 +15,9 @@ function Homepage() {
       budget: ''
     },
     validationSchema: basicFormSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting }) => {
       console.log(values);
+      setSubmitting(false);
     }
   });
 

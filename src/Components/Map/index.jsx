@@ -30,32 +30,39 @@ const Map = ({ coordinates, setCoordinates, setBounds, formik }) => {
         />
       </Box>
       <Box p={3} borderRadius={1} m={4} bgcolor="white" boxShadow={2} zIndex={1}>
-        <Stack direction="row" spacing={2}>
-          <Input
-            label={t('input.departurePoint')}
-            value={formik.values.departurePoint}
-            onChange={formik.handleChange('departurePoint')}
-            onBlur={formik.handleBlur('departurePoint')}
-            error={formik.touched.arrivalPoint && Boolean(formik.errors.departurePoint)}
-            required
-          />
-          <Input
-            label={t('input.arrivalPoint')}
-            value={formik.values.arrivalPoint}
-            onChange={formik.handleChange('arrivalPoint')}
-            onBlur={formik.handleBlur('arrivalPoint')}
-            error={formik.touched.arrivalPoint && Boolean(formik.errors.arrivalPoint)}
-            required
-          />
-          <Input
-            label={t('input.budget')}
-            value={formik.values.budget}
-            onChange={formik.handleChange('budget')}
-            onBlur={formik.handleBlur('budget')}
-            error={formik.touched.budget && Boolean(formik.errors.budget)}
-          />
-          <MainButton onClick={formik.handleSubmit}>{t('button.createRoute')}</MainButton>
-        </Stack>
+        <form onSubmit={formik.handleSubmit} noValidate>
+          <Stack direction="row" spacing={2}>
+            <Input
+              label={t('input.departurePoint')}
+              onChange={formik.handleChange('departurePoint')}
+              value={formik.values.departurePoint}
+              onBlur={formik.handleBlur}
+              error={formik.touched.departurePoint && Boolean(formik.errors.departurePoint)}
+              required
+            />
+
+            <Input
+              label={t('input.arrivalPoint')}
+              value={formik.values.arrivalPoint}
+              onChange={formik.handleChange('arrivalPoint')}
+              onBlur={formik.handleBlur}
+              error={formik.touched.arrivalPoint && Boolean(formik.errors.arrivalPoint)}
+              required
+            />
+
+            <Input
+              label={t('input.budget')}
+              type="number"
+              value={formik.values.budget}
+              onChange={formik.handleChange('budget')}
+              onBlur={formik.handleBlur}
+              error={formik.touched.budget && Boolean(formik.errors.budget)}
+              inputProps={{ min: 1 }}
+            />
+
+            <MainButton type="submit">{t('button.createRoute')}</MainButton>
+          </Stack>
+        </form>
       </Box>
     </Box>
   );
