@@ -14,6 +14,7 @@ import MainButton from '../Button/MainButton';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { registerSchema } from '../../Schemas';
+import ErrorPopup from '../ErrorPopup';
 
 const Register = ({ handleClose, open }) => {
   const { t } = useTranslation();
@@ -54,7 +55,7 @@ const Register = ({ handleClose, open }) => {
             {t('page.signup')}
           </Typography>
         </DialogTitle>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} noValidate>
           <DialogContent>
             <Grid container spacing={2}>
               {formik.errors.general && (
@@ -64,6 +65,7 @@ const Register = ({ handleClose, open }) => {
               )}
               <Grid item xs={6}>
                 <Input
+                  required
                   label={t('signup.input.firstName')}
                   onChange={formik.handleChange('firstName')}
                   value={formik.values.firstName}
@@ -73,6 +75,7 @@ const Register = ({ handleClose, open }) => {
               </Grid>
               <Grid item xs={6}>
                 <Input
+                  required
                   label={t('signup.input.lastName')}
                   onChange={formik.handleChange('lastName')}
                   value={formik.values.lastName}
@@ -81,6 +84,7 @@ const Register = ({ handleClose, open }) => {
               </Grid>
               <Grid item xs={12}>
                 <Input
+                  required
                   label={t('signup.input.mail')}
                   onChange={formik.handleChange('email')}
                   value={formik.values.email}
@@ -89,6 +93,7 @@ const Register = ({ handleClose, open }) => {
               </Grid>
               <Grid item xs={6}>
                 <Input
+                  required
                   label={t('signup.input.password')}
                   onChange={formik.handleChange('password')}
                   value={formik.values.password}
@@ -99,6 +104,7 @@ const Register = ({ handleClose, open }) => {
               </Grid>
               <Grid item xs={6}>
                 <Input
+                  required
                   label={t('signup.input.passwordAgain')}
                   onChange={formik.handleChange('passwordAgain')}
                   value={formik.values.passwordAgain}
@@ -126,6 +132,7 @@ const Register = ({ handleClose, open }) => {
           </DialogContent>
         </form>
       </Dialog>
+      <ErrorPopup formik={formik} />
     </>
   );
 };
