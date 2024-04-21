@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MenuItem, Box, Menu, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
@@ -11,9 +11,14 @@ const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    languages.find((l) => l.value === i18n.language)
-  );
+  const [selectedLanguage, setSelectedLanguage] = useState('');
+
+  useEffect(() => {
+    if (i18n.language) {
+      const lang = languages.find((l) => l.value === i18n.language.split('-')[0]);
+      setSelectedLanguage(lang);
+    }
+  }, [i18n.language]);
 
   const open = Boolean(anchorEl);
 
