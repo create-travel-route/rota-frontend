@@ -55,3 +55,15 @@ export const loginSchema = yup.object().shape({
 
   rememberMe: yup.boolean()
 });
+
+export const createPropertySchema = yup.object().shape({
+  title: yup.string().required(<Trans i18nKey="validation.title.required" />),
+
+  description: yup.string().required(<Trans i18nKey="validation.description.required" />),
+
+  budget: yup.number().min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />),
+
+  category: yup.string().required(<Trans i18nKey="validation.category.required" />),
+
+  address: yup.string().required(<Trans i18nKey="validation.address.required" />)
+});
