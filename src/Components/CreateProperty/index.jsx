@@ -9,6 +9,7 @@ import MainButton from '../Button/MainButton';
 import PlaceIcon from '@mui/icons-material/Place';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { createPropertySchema } from '../../Schemas';
 
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
@@ -28,6 +29,7 @@ const CreateProperty = ({ isUpdate }) => {
       lat: '',
       lng: ''
     },
+    validationSchema: createPropertySchema,
     onSubmit: async (values, bag) => {
       console.log({ ...values, address, ...location });
     }
