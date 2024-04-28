@@ -1,9 +1,9 @@
 import React from 'react';
 import { CreateProperty } from '../../Components';
-function CreatePropertyPage() {
+function CreatePropertyPage({ isUpdate }) {
   return (
     <div>
-      <CreateProperty />
+      <CreateProperty isUpdate={isUpdate} />
     </div>
   );
 }

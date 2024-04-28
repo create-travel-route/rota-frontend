@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Box, Select, MenuItem, InputLabel, FormControl, Typography } from '@mui/material';
 import GoogleMapReact from 'google-map-react';
 import { Category } from '../../Constants/Category';
@@ -7,13 +7,17 @@ import { useFormik } from 'formik';
 import Input from '../Input';
 import MainButton from '../Button/MainButton';
 import PlaceIcon from '@mui/icons-material/Place';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
-const CreateProperty = () => {
+const CreateProperty = ({ isUpdate }) => {
   const { t } = useTranslation();
   const [location, setLocation] = useState(center); // Konum state'i
   const [address, setAddress] = useState('');
-
+  const [data, setData] = useState(null);
+  const { id } = useParams();
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -36,10 +40,10 @@ const CreateProperty = () => {
 
   const getAddressFromCoordinates = async (lat, lng) => {
     try {
-      const response = await fetch(
+      const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}`
       );
-      const data = await response.json();
+      const data = response.data;
       if (data.status === 'OK') {
         const address = data.results[0].formatted_address;
         setAddress(address);
@@ -55,6 +59,20 @@ const CreateProperty = () => {
     setAddress(event.target.value);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://662e684ea7dda1fa378cddf4.mockapi.io/api/property/${id}`
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
   return (
     <Box
       display="flex"
@@ -71,14 +89,14 @@ const CreateProperty = () => {
           textAlign: 'center'
         }}
         gutterBottom>
-        {t('page.createProperty')}
+        {isUpdate ? t('page.updateProperty') : t('page.createProperty')}
       </Typography>
       <form onSubmit={formik.handleSubmit} noValidate>
         <Stack direction="column" style={{ width: '550px' }} spacing={2}>
           <Input
             label={t('input.title')}
             onChange={formik.handleChange('title')}
-            value={formik.values.title}
+            value={isUpdate && data ? data.title : formik.values.title}
             onBlur={formik.handleBlur}
             error={formik.touched.title && Boolean(formik.errors.title)}
             required
@@ -86,7 +104,7 @@ const CreateProperty = () => {
 
           <Input
             label={t('input.description')}
-            value={formik.values.description}
+            value={isUpdate && data ? data.description : formik.values.description}
             onChange={formik.handleChange('description')}
             onBlur={formik.handleBlur}
             error={formik.touched.description && Boolean(formik.errors.description)}
@@ -98,7 +116,7 @@ const CreateProperty = () => {
               labelId="category-label"
               id="category"
               label={t('input.category')}
-              value={formik.values.category}
+              value={isUpdate && data ? data.category : formik.values.category}
               onChange={formik.handleChange('category')}
               onBlur={formik.handleBlur}
               error={formik.touched.category && Boolean(formik.errors.category)}
@@ -113,7 +131,7 @@ const CreateProperty = () => {
           <Stack direction="row" alignItems="center">
             <Input
               label={t('input.address')}
-              value={address}
+              value={isUpdate && data ? data.address : address}
               onChange={handleAddressChange}
               onBlur={formik.handleBlur}
               error={formik.touched.address && Boolean(formik.errors.address)}
@@ -133,14 +151,16 @@ const CreateProperty = () => {
           <Input
             label={t('input.budget')}
             type="number"
-            value={formik.values.budget}
+            value={isUpdate && data ? data.budget : formik.values.budget}
             onChange={formik.handleChange('budget')}
             onBlur={formik.handleBlur}
             error={formik.touched.budget && Boolean(formik.errors.budget)}
             inputProps={{ min: 1 }}
             required
           />
-          <MainButton type="submit">{t('button.createProperty')}</MainButton>
+          <MainButton type="submit">
+            {isUpdate ? t('button.updateProperty') : t('button.createProperty')}
+          </MainButton>
         </Stack>
       </form>
     </Box>

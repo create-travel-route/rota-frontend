@@ -8,7 +8,8 @@ const App = () => {
     <Layout>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/create-property" element={<CreatePropertyPage />} />
+        <Route path="/create-property" element={<CreatePropertyPage isUpdate={false} />} />
+        <Route path="/update-property/:id" element={<CreatePropertyPage isUpdate={true} />} />
         {routes.map(({ path, element: Element, permissions }, index) => (
           //<Route key={index} element={<Control permissions={permissions} />}>
           <Route key={index} path={path} element={<Element />} />
