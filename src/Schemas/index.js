@@ -3,19 +3,19 @@ import { Trans } from 'react-i18next';
 
 export const basicFormSchema = yup.object().shape({
   departurePoint: yup
-    // .object({
-    //   lat: yup.number().min(-90).max(90).required(),
-    //   lng: yup.number().min(-180).max(180).required()
-    // })
-    .string()
+    .object({
+      lat: yup.number().min(-90).max(90).required(),
+      lng: yup.number().min(-180).max(180).required()
+    })
+    .nullable()
     .required(<Trans i18nKey="validation.departurePoint.required" />),
 
   arrivalPoint: yup
-    // .object({
-    //   lat: yup.number().min(-90).max(90).required(),
-    //   lng: yup.number().min(-180).max(180).required()
-    // })
-    .string()
+    .object({
+      lat: yup.number().min(-90).max(90).required(),
+      lng: yup.number().min(-180).max(180).required()
+    })
+    .nullable()
     .required(<Trans i18nKey="validation.arrivalPoint.required" />),
 
   budget: yup.number().min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />)
@@ -61,9 +61,18 @@ export const createPropertySchema = yup.object().shape({
 
   description: yup.string().required(<Trans i18nKey="validation.description.required" />),
 
-  budget: yup.number().min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />),
+  budget: yup
+    .number()
+    .min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />)
+    .required(<Trans i18nKey="validation.budget.required" />),
 
   category: yup.string().required(<Trans i18nKey="validation.category.required" />),
 
-  address: yup.string().required(<Trans i18nKey="validation.address.required" />)
+  address: yup
+    .object({
+      lat: yup.number().min(-90).max(90).required(),
+      lng: yup.number().min(-180).max(180).required()
+    })
+    .nullable()
+    .required(<Trans i18nKey="validation.address.required" />)
 });

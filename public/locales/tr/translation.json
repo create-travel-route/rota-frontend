@@ -59,6 +59,7 @@
   "button.updateProperty": "Güncelle",
   "errorPopup.title": "Uyarı",
   "errorPopup.button.title": "Tamam",
+  "map.noOptions": "Konum bulunamadı",
   "validation.departurePoint.required": "'Nereden' alanından bir konum seçilmesi zorunludur!",
   "validation.arrivalPoint.required": "'Nereye' alanından bir konum seçilmesi zorunludur!",
   "validation.minValue.budget": "'Bütçe' alanına en az {{ max }} girilebilir!",
@@ -69,5 +70,10 @@
   "validation.firstName.required": "'İsim' alanına giriş yapılması zorunludur!",
   "validation.lastName.required": "'Soyisim' alanına giriş yapılması zorunludur!",
   "validation.minDigit.password": "'Şifre' en az {{ min }} basamaklı olmalıdır!",
-  "validation.maxDigit.password": "'Şifre' en fazla {{ max }} basamaklı olabilir!"
+  "validation.maxDigit.password": "'Şifre' en fazla {{ max }} basamaklı olabilir!",
+  "validation.title.required": "'Başlık' alanına giriş yapılması zorunludur!",
+  "validation.description.required": "'Açıklama' alanına giriş yapılması zorunludur!",
+  "validation.category.required": "'Kategori' alanından bir seçim yapılması zorunludur!",
+  "validation.address.required": "'Adres' alanına giriş yapılması zorunludur!",
+  "validation.budget.required": "'Bütçe' alanına giriş yapılması zorunludur!"
 }
