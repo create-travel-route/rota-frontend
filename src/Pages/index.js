@@ -1,3 +1,3 @@
 import Homepage from './Homepage';
-
-export { Homepage };
+import CreatePropertyPage from './CreatePropertyPage';
+export { Homepage, CreatePropertyPage };
