@@ -10,8 +10,8 @@ function Homepage() {
 
   const formik = useFormik({
     initialValues: {
-      departurePoint: '',
-      arrivalPoint: '',
+      departurePoint: null,
+      arrivalPoint: null,
       budget: ''
     },
     validationSchema: basicFormSchema,

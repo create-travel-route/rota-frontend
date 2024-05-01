@@ -22,6 +22,8 @@
   "footer.support": "Support",
   "footer.support.account": "Account",
   "footer.support.supportCenter": "Support Center",
+  "footer.support.contact": "Contact Us",
+  "footer.support.feedback": "Feedback",
   "input.departurePoint": "Departure Point",
   "input.arrivalPoint": "Arrival Point",
   "input.budget": "Budget",
@@ -43,6 +45,8 @@
   "login.buttonText": "Login",
   "login.rememberMe": "Remember me",
   "login.forgotPassword": "Forgot Password",
+  "login.input.mail": "example@example.com",
+  "login.input.password": "Şifre",
   "login.donthaveAccount": "Don't have an account ?",
   "login.signup": "Signup",
   "category.EatAndDrink":"Eat And Drink",
@@ -55,6 +59,7 @@
   "button.createProperty": "Create",
   "errorPopup.title": "Warning",
   "errorPopup.button.title": "Okey",
+  "map.noOptions": "No locations",
   "validation.departurePoint.required": "Selecting a location from the 'Departure Point' field is required!",
   "validation.arrivalPoint.required": "Selecting a location from the 'Arrival Point' field is required!",
   "validation.minValue.budget": "Minimum of {{ min }} budget is required!",
@@ -65,5 +70,10 @@
   "validation.firstName.required": "'First Name' field is required!",
   "validation.lastName.required": "'Last Name' field is required!",
   "validation.minDigit.password": "'Password' field must be at least {{ min }} digits long!",
-  "validation.maxDigit.password": "'Password' field can be at most {{ max }} digits long!"
+  "validation.maxDigit.password": "'Password' field can be at most {{ max }} digits long!",
+  "validation.title.required": "'Title' field is required!",
+  "validation.description.required": "'Description' field is required!",
+  "validation.budget.required": "'Budget' field is required!",
+  "validation.category.required": "'Category' field is required!",
+  "validation.address.required": "'Address' field is required!"
 }

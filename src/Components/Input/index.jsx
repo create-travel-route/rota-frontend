@@ -20,6 +20,13 @@ const Input = ({ type, value, onChange, error, helperText, label, length, ...pro
       error={error}
       helperText={helperText}
       fullWidth
+      sx={{
+        '& .MuiOutlinedInput-root': {
+          '&:hover fieldset': {
+            borderColor: 'primary.main'
+          }
+        }
+      }}
       inputProps={{
         maxLength: length
       }}

@@ -4,6 +4,22 @@ import Map from './Map';
 import Register from './Register';
 import Login from './Login';
 import ErrorPopup from './ErrorPopup';
-import CreateProperty from './CreateProperty';
+import PlacesAutocomplete from './PlacesAutocomplete';
+import MapHandler from './MapHandler';
+import MainButton from './Button/MainButton';
+import SecondaryButton from './Button/SecondaryButton';
+import TertiaryButton from './Button/TertiaryButton';
 
-export { LanguageSwitcher, Input, Map, Register, Login, ErrorPopup, CreateProperty };
+export {
+  LanguageSwitcher,
+  Input,
+  Map,
+  Register,
+  Login,
+  ErrorPopup,
+  PlacesAutocomplete,
+  MapHandler,
+  MainButton,
+  SecondaryButton,
+  TertiaryButton
+};
