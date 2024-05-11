@@ -3,7 +3,7 @@ import { Box, MenuItem, Typography, Grid, Container, Stack } from '@mui/material
 import { Category } from '../../Constants/Category';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { createPropertySchema } from '../../Schemas';
 import {
   APIProvider,
@@ -15,6 +15,8 @@ import {
   useMapsLibrary
 } from '@vis.gl/react-google-maps';
 import { ErrorPopup, Input, MainButton, MapHandler, PlacesAutocomplete } from '../../Components';
+import useRequest from '../../Hooks/useRequest';
+import ENDPOINTS from '../../Constants/Endpoints';
 
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
@@ -25,6 +27,9 @@ const CreatePropertyPage = ({ isUpdate }) => {
   const [markerRef] = useMarkerRef();
 
   const { id } = useParams();
+  const { createData, updateData, useGetData } = useRequest();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -37,8 +42,42 @@ const CreatePropertyPage = ({ isUpdate }) => {
       lng: ''
     },
     validationSchema: createPropertySchema,
-    onSubmit: async (values, bag) => {
-      console.log({ ...values });
+    onSubmit: async (values) => {
+      if (pathname.includes('create-property')) {
+        await createData.mutateAsync(
+          {
+            endpoint: ENDPOINTS.properties,
+            body: {
+              ...values,
+              address: selectedPlace,
+              lat: latLng.lat,
+              lng: latLng.lng
+            }
+          },
+          {
+            onSuccess: async () => {
+              navigate('/');
+            }
+          }
+        );
+      } else {
+        await updateData.mutateAsync(
+          {
+            endpoint: `${ENDPOINTS.properties}/${id}`,
+            body: {
+              ...values,
+              address: selectedPlace,
+              lat: latLng.lat,
+              lng: latLng.lng
+            }
+          },
+          {
+            onSuccess: async () => {
+              navigate('/');
+            }
+          }
+        );
+      }
     }
   });
 
@@ -132,6 +171,10 @@ const CreatePropertyPage = ({ isUpdate }) => {
                     disableDefaultUI={true}
                     onClick={(e) => {
                       setLatLng(e.detail.latLng);
+                      formik.setFieldValue('address', {
+                        lat: e.detail.latLng.lat,
+                        lng: e.detail.latLng.lng
+                      });
                     }}>
                     <Geocoding />
                     {latLng && <Marker ref={markerRef} position={latLng} />}

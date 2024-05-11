@@ -9,6 +9,7 @@ import MapHandler from './MapHandler';
 import MainButton from './Button/MainButton';
 import SecondaryButton from './Button/SecondaryButton';
 import TertiaryButton from './Button/TertiaryButton';
+import StateAlert from './StateAlert';
 
 export {
   LanguageSwitcher,
@@ -21,5 +22,6 @@ export {
   MapHandler,
   MainButton,
   SecondaryButton,
-  TertiaryButton
+  TertiaryButton,
+  StateAlert
 };

@@ -59,11 +59,9 @@ const ErrorPopup = ({ formik }) => {
       aria-describedby="alert-dialog-description">
       <DialogTitle id="alert-dialog-title">{t('errorPopup.title')}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          {errors.map((item, index) => (
-            <Typography key={index}>{t(item)}</Typography>
-          ))}
-        </DialogContentText>
+        {errors.map((item, index) => (
+          <DialogContentText key={index}>{t(item)}</DialogContentText>
+        ))}
       </DialogContent>
       <DialogActions>
         <SecondaryButton onClick={handleClose}>{t('errorPopup.button.title')}</SecondaryButton>
