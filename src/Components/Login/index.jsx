@@ -6,7 +6,8 @@ import {
   FormControlLabel,
   Dialog,
   DialogContent,
-  Box
+  Box,
+  Alert
 } from '@mui/material';
 import Input from '../Input';
 import MainButton from '../Button/MainButton';
@@ -17,6 +18,8 @@ import { loginSchema } from '../../Schemas';
 import Register from '../Register';
 import styled from '@emotion/styled';
 import ErrorPopup from '../ErrorPopup';
+import { login } from '../../Utils/Auth';
+import useAuth from '../../Hooks/useAuth';
 
 const Item = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -26,7 +29,10 @@ const Item = styled(Box)(({ theme }) => ({
 
 function Login({ handleClose, open }) {
   const { t } = useTranslation();
+  const { loginAccount } = useAuth();
+
   const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [apiErrors, setApiErrors] = useState(null);
 
   useEffect(() => {
     if (!open) {
@@ -41,8 +47,17 @@ function Login({ handleClose, open }) {
       rememberMe: false
     },
     validationSchema: loginSchema,
-    onSubmit: async (values, bag) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const loginResponse = await login({
+          email: values.email,
+          password: values.password
+        });
+        loginAccount(loginResponse);
+        handleClose();
+      } catch (error) {
+        setApiErrors(error.response.data.errors[0].message);
+      }
     }
   });
 
@@ -69,6 +84,7 @@ function Login({ handleClose, open }) {
           </Typography>
           <form onSubmit={formik.handleSubmit} noValidate>
             <Stack direction="column" spacing={2}>
+              {apiErrors && <Alert severity="error">{apiErrors}</Alert>}
               <Input
                 label={t('login.mail')}
                 placeholder="info@mail.com"

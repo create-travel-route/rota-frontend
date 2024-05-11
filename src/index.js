@@ -14,6 +14,7 @@ import createTheme from './Theme';
 
 import App from './App';
 import RequestProvider from './Contexts/RequestContext';
+import AuthProvider from './Contexts/AuthContext';
 
 const theme = createTheme();
 
@@ -29,13 +30,15 @@ root.render(
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={tr}>
-          <RequestProvider>
-            <React.StrictMode>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </React.StrictMode>
-          </RequestProvider>
+          <AuthProvider>
+            <RequestProvider>
+              <React.StrictMode>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </React.StrictMode>
+            </RequestProvider>
+          </AuthProvider>
         </LocalizationProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

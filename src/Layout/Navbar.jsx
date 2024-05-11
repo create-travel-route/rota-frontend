@@ -15,14 +15,20 @@ import {
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { LanguageSwitcher, Login } from '../Components';
 import { useTranslation } from 'react-i18next';
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import useAuth from '../Hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+
+const settings = ['profile', 'logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
+
+  const navigate = useNavigate();
   const { t } = useTranslation();
+  const { loggedIn, logoutAccount, user, isLoginOpen, setIsLoginOpen } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -133,11 +139,14 @@ function Navbar() {
             </Box>
 
             <Box sx={{ flexGrow: 0, display: { xs: 'center', md: 'flex' } }}>
-              {isLoggedIn ? (
+              {loggedIn ? (
                 <>
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                      <Avatar
+                        alt={user?.firstName.concat(' ', user?.lastName).toUpperCase()}
+                        src="/static/images/avatar/2.jpg"
+                      />
                     </IconButton>
                   </Tooltip>
                   <Menu
@@ -156,8 +165,20 @@ function Navbar() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}>
                     {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
+                      <MenuItem
+                        key={setting}
+                        onClick={async () => {
+                          if (setting === 'logout') {
+                            logoutAccount(() => {
+                              navigate('/');
+                            });
+                          }
+                          if (setting === 'profile') {
+                            navigate('/profile');
+                          }
+                          handleCloseUserMenu();
+                        }}>
+                        <Typography textAlign="center">{t(`navbar.${setting}`)}</Typography>
                       </MenuItem>
                     ))}
                   </Menu>

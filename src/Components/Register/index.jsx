@@ -15,9 +15,17 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { registerSchema } from '../../Schemas';
 import ErrorPopup from '../ErrorPopup';
+import useAuth from '../../Hooks/useAuth';
+import { register } from '../../Utils/Auth';
+import StateAlert from '../StateAlert';
+import { Check } from '@mui/icons-material';
 
 const Register = ({ handleClose, open }) => {
   const { t } = useTranslation();
+  const { setIsLoginOpen } = useAuth();
+
+  const [apiErrors, setApiErrors] = useState(null);
+  const [successModal, setSuccessModal] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -36,7 +44,35 @@ const Register = ({ handleClose, open }) => {
     },
     validationSchema: registerSchema,
     onSubmit: async (values, bag) => {
-      console.log(values);
+      try {
+        await register({
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          password: values.password,
+          passwordAgain: values.passwordAgain,
+          isHost: values.isHost
+        }).then((res) => {
+          if (res) {
+            bag.resetForm();
+            setSuccessModal(true);
+            setIsLoginOpen(true);
+            handleClose();
+          }
+        });
+      } catch (error) {
+        if (typeof error === 'string') {
+          setApiErrors(error);
+        } else if (typeof error === 'object') {
+          if (error.name === 'AxiosError') {
+            setApiErrors(error.response.data);
+          } else if (error.message) {
+            setApiErrors(error.message);
+          } else if (Array.isArray(error)) {
+            setApiErrors(error.map((err) => err.message).join(', '));
+          }
+        }
+      }
     }
   });
 
@@ -58,9 +94,9 @@ const Register = ({ handleClose, open }) => {
         <form onSubmit={formik.handleSubmit} noValidate>
           <DialogContent>
             <Grid container spacing={2}>
-              {formik.errors.general && (
+              {apiErrors && (
                 <Grid item xs={12}>
-                  <Alert severity="error">{formik.errors.general}</Alert>
+                  <Alert severity="error">{apiErrors}</Alert>
                 </Grid>
               )}
               <Grid item xs={6}>
@@ -132,6 +168,16 @@ const Register = ({ handleClose, open }) => {
           </DialogContent>
         </form>
       </Dialog>
+      <StateAlert
+        open={successModal}
+        autoHideDuration={3000}
+        handleClose={() => setSuccessModal(false)}
+        severity="success"
+        alertTitle={t('stateAlert.title.success')}
+        alertText={t('stateAlert.text.registerSuccess')}
+        buttonText={t('common.close')}
+        icon={<Check fontSize="inherit" />}
+      />
       <ErrorPopup formik={formik} />
     </>
   );
