@@ -13,7 +13,7 @@ import {
   Button
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
-import { LanguageSwitcher, Login } from '../Components';
+import { LanguageSwitcher, Login, RateAndComment } from '../Components';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';

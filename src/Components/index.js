@@ -10,6 +10,7 @@ import MainButton from './Button/MainButton';
 import SecondaryButton from './Button/SecondaryButton';
 import TertiaryButton from './Button/TertiaryButton';
 import StateAlert from './StateAlert';
+import RateAndComment from './RateAndComment';
 
 export {
   LanguageSwitcher,
@@ -23,5 +24,6 @@ export {
   MainButton,
   SecondaryButton,
   TertiaryButton,
-  StateAlert
+  StateAlert,
+  RateAndComment
 };
