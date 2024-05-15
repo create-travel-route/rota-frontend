@@ -6,7 +6,10 @@ export const ROLES = {
 };
 
 // izinler
-export const PERMISSIONS = {};
+export const PERMISSIONS = {
+  CREATE_PROPERTY: 'can_create_property',
+  UPDATE_PROPERTY: 'can_update_property'
+};
 
 // kullanici izinleri eklenir
 export const USER_PERMISSIONS = [
@@ -14,7 +17,7 @@ export const USER_PERMISSIONS = [
   { role: ROLES.HOST, permissions: Object.values(PERMISSIONS) },
   {
     role: ROLES.TRAVELER,
-    permissions: Object.values(PERMISSIONS)
+    permissions: []
   },
   {
     role: ROLES.GUEST,

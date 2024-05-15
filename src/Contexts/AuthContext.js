@@ -46,7 +46,8 @@ const AuthProvider = ({ children }) => {
     loginAccount,
     logoutAccount,
     isLoginOpen,
-    setIsLoginOpen
+    setIsLoginOpen,
+    loading
   };
 
   return (
