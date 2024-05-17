@@ -17,8 +17,7 @@ import { LanguageSwitcher, Login } from '../Components';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-
-const settings = ['profile', 'logout'];
+import { ROLES } from '../Constants/Permissions';
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -29,6 +28,9 @@ function Navbar() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { loggedIn, logoutAccount, user, isLoginOpen, setIsLoginOpen } = useAuth();
+
+  const settings =
+    user?.role === ROLES.TRAVELER ? ['profile', 'logout'] : ['profile', 'properties', 'logout'];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -176,6 +178,11 @@ function Navbar() {
                           if (setting === 'profile') {
                             navigate('/profile');
                           }
+
+                          if (setting === 'properties') {
+                            navigate('/properties');
+                          }
+
                           handleCloseUserMenu();
                         }}>
                         <Typography textAlign="center">{t(`navbar.${setting}`)}</Typography>

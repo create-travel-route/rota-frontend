@@ -1,70 +1,72 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import LocalCafeIcon from '@mui/icons-material/LocalCafe'; // Kategori ikonu örneği
-import MuseumIcon from '@mui/icons-material/Museum';
-import { Box, Container, ListItemButton, Rating, Stack } from '@mui/material';
+import {
+  Box,
+  Container,
+  ListItemButton,
+  Rating,
+  Stack,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Typography
+} from '@mui/material';
+import { Museum, Nightlife, Restaurant, ShoppingBag, SportsTennis } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-
-const places = [
-  {
-    id: 1,
-    title: 'Mavi Durak',
-    description: 'Kafelerin bulunduğu cadde',
-    category: 'EatAndDrink',
-    address: 'Mavi Durak, Serdivan, Sakarya',
-    location: {
-      type: 'Point',
-      coordinates: [30.361476, 40.762381]
-    },
-    budget: 100,
-    rating: 4.5,
-    hostId: null
-  },
-  {
-    id: 2,
-    title: 'Serdivan',
-    description: 'Avm bulunduğu cadde',
-    category: 'Museum',
-    address: ' Serdivan, Sakarya',
-    location: {
-      type: 'Point',
-      coordinates: [30.361476, 40.762381]
-    },
-    budget: 500,
-    rating: 4.0,
-    hostId: null
-  }
-
-  // Diğer mekanlar burada tanımlanabilir
-];
+import useAuth from '../../Hooks/useAuth';
+import useRequest from '../../Hooks/useRequest';
+import ENDPOINTS from '../../Constants/Endpoints';
+import { Category } from '../../Constants/Category';
 
 const categoryIcons = {
-  EatAndDrink: <LocalCafeIcon />,
-  Museum: <MuseumIcon />
-  // Diğer kategoriler için ikonlar eklenebilir
+  [Category.EatAndDrink]: <Restaurant />,
+  [Category.Historical]: <Museum />,
+  [Category.Entertainment]: <Nightlife />,
+  [Category.Sport]: <SportsTennis />,
+  [Category.Shopping]: <ShoppingBag />
 };
 
 function PropertyList() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { useGetData } = useRequest();
+  const { user } = useAuth();
+
+  // hostIdye gore getir
+  const { data: properties } = useGetData(
+    'properties',
+    `${ENDPOINTS.properties}?hostId=${user?.id}`,
+    {
+      enabled: !!user
+    }
+  );
+
+  console.log(properties);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Container>
+        <Typography
+          sx={{
+            color: 'header.main',
+            fontWeight: 'bold',
+            fontSize: '32px',
+            textAlign: 'center',
+            mt: 1
+          }}
+          gutterBottom>
+          {t('navbar.properties')}
+        </Typography>
         <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper', mt: 2 }}>
-          {places.map((place) => (
-            <React.Fragment key={place.id}>
+          {properties?.map((property) => (
+            <React.Fragment key={property.id}>
               <ListItem alignItems="flex-start">
-                <ListItemButton onClick={() => navigate(`/property-list/${place.id}`)}>
+                <ListItemButton onClick={() => navigate(`/properties/${property.id}`)}>
                   <ListItemAvatar>
-                    <Avatar>{categoryIcons[place.category]}</Avatar>
+                    <Avatar>{categoryIcons[property.category]}</Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     primary={
@@ -80,17 +82,17 @@ function PropertyList() {
                               component="span"
                               variant="h6"
                               color="text.primary">
-                              {place.title}
+                              {property.title}
                             </Typography>
                             <Typography
                               sx={{ display: 'block', fontWeight: 'bold' }}
                               component="span"
                               variant="body2"
                               color="text.secondary">
-                              {place.address}
+                              {property.address}
                             </Typography>
                           </Stack>
-                          <Rating name="read-only" size="small" value={place.rating} readOnly />
+                          <Rating name="read-only" size="small" value={property.rating} readOnly />
                         </Stack>
                       </React.Fragment>
                     }
@@ -101,7 +103,7 @@ function PropertyList() {
                           component="span"
                           variant="body2"
                           color="text.primary">
-                          {place.description}
+                          {property.description}
                         </Typography>
 
                         <Typography
@@ -116,7 +118,7 @@ function PropertyList() {
                             color="text.secondary">
                             {t('input.budget')}:
                           </Typography>
-                          {place.budget} TL
+                          {property.budget} TL
                         </Typography>
                       </React.Fragment>
                     }
