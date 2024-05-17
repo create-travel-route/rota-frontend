@@ -9,7 +9,7 @@ const App = () => {
     <Layout>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/property-list" element={<PropertyList />} />
+        <Route path="/properties" element={<PropertyList />} />
         {routes.map(({ path, element: Element, permissions, params }, index) => (
           <Route key={index} element={<Control permissions={permissions} />}>
             <Route key={index} path={path} element={<Element {...params} />} />

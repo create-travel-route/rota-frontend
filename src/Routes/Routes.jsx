@@ -1,5 +1,5 @@
 import { PERMISSIONS } from '../Constants/Permissions';
-import { CreatePropertyPage } from '../Pages';
+import { CreatePropertyPage, Profile } from '../Pages';
 
 export const routes = [
   {
@@ -12,5 +12,10 @@ export const routes = [
     element: CreatePropertyPage,
     permissions: [PERMISSIONS.UPDATE_PROPERTY],
     params: { isUpdate: true }
+  },
+  {
+    path: '/profile',
+    element: Profile,
+    permissions: [PERMISSIONS.PROFILE]
   }
 ];
