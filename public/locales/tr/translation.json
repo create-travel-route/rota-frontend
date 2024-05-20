@@ -91,5 +91,8 @@
   "validation.description.required": "'Açıklama' alanına giriş yapılması zorunludur!",
   "validation.category.required": "'Kategori' alanından bir seçim yapılması zorunludur!",
   "validation.address.required": "'Adres' alanına giriş yapılması zorunludur!",
-  "validation.budget.required": "'Bütçe' alanına giriş yapılması zorunludur!"
+  "validation.budget.required": "'Bütçe' alanına giriş yapılması zorunludur!",
+  "validation.rate.required":"'Değerlendirme' alanına giriş yapılması zorunludur!",
+  "validation.comment.required":"'Yorum' alanına giriş yapılması zorunludur!"
+
 }
