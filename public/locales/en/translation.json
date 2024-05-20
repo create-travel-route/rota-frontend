@@ -91,5 +91,7 @@
   "validation.description.required": "'Description' field is required!",
   "validation.budget.required": "'Budget' field is required!",
   "validation.category.required": "'Category' field is required!",
-  "validation.address.required": "'Address' field is required!"
+  "validation.address.required": "'Address' field is required!",
+  "validation.rate.required":"'Rate' field is required!",
+  "validation.comment.required":"'Comment' field is required!"
 }
