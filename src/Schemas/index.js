@@ -77,8 +77,15 @@ export const createPropertySchema = yup.object().shape({
     .required(<Trans i18nKey="validation.address.required" />)
 });
 
+
 export const updateAccountSchema = yup.object().shape({
   firstName: yup.string().required(<Trans i18nKey="validation.firstName.required" />),
 
   lastName: yup.string().required(<Trans i18nKey="validation.lastName.required" />)
+
+export const rateAndCommentSchema = yup.object().shape({
+  rate: yup.number().min(1).max(5).required(),
+
+  comment: yup.string().required()
+
 });
