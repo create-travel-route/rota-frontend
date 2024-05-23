@@ -7,8 +7,7 @@ import useRequest from '../../Hooks/useRequest';
 import ENDPOINTS from '../../Constants/Endpoints';
 
 function Homepage() {
-  const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState(null);
+  const [routes, setRoutes] = useState([]);
 
   const { axios } = useRequest();
 
@@ -26,6 +25,7 @@ function Homepage() {
         )
         .then((response) => {
           if (response) {
+            setRoutes(response.data);
             setSubmitting(false);
           }
         });
@@ -35,12 +35,7 @@ function Homepage() {
   return (
     <>
       <Box sx={{ flexGrow: 1, m: 2 }}>
-        <Map
-          coordinates={coordinates}
-          setCoordinates={setCoordinates}
-          setBounds={setBounds}
-          formik={formik}
-        />
+        <Map routes={routes} formik={formik} />
       </Box>
       <ErrorPopup formik={formik} />
     </>

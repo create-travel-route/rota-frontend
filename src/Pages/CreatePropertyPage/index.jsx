@@ -31,6 +31,10 @@ const CreatePropertyPage = ({ isUpdate }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  const { data: property } = useGetData('property', `${ENDPOINTS.properties}/${id}`, {
+    enabled: !!id
+  });
+
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -56,7 +60,7 @@ const CreatePropertyPage = ({ isUpdate }) => {
           },
           {
             onSuccess: async () => {
-              navigate('/');
+              navigate('/properties');
             }
           }
         );
@@ -73,13 +77,32 @@ const CreatePropertyPage = ({ isUpdate }) => {
           },
           {
             onSuccess: async () => {
-              navigate('/');
+              navigate('/properties');
             }
           }
         );
       }
     }
   });
+
+  useEffect(() => {
+    if (property) {
+      formik.setValues({
+        title: property.title,
+        description: property.description,
+        category: property.category,
+        budget: property.budget,
+        address: {
+          lat: property.location.coordinates[1],
+          lng: property.location.coordinates[0]
+        },
+        lat: property.location.coordinates[1],
+        lng: property.location.coordinates[0]
+      });
+      setSelectedPlace(property.address);
+      setLatLng({ lat: property.location?.coordinates[1], lng: property.location?.coordinates[0] });
+    }
+  }, [property]);
 
   const Geocoding = () => {
     const geocodingLib = useMapsLibrary('geocoding');
@@ -88,7 +111,7 @@ const CreatePropertyPage = ({ isUpdate }) => {
     useEffect(() => {
       if (!geocoder && !latLng) return;
 
-      geocoder.geocode({ location: latLng }).then((result) => {
+      geocoder?.geocode({ location: latLng }).then((result) => {
         const { results } = result;
         const address = results[0].formatted_address;
         setSelectedPlace(address);

@@ -12,10 +12,11 @@ import {
 } from '@vis.gl/react-google-maps';
 import PlacesAutocomplete from '../PlacesAutocomplete';
 import MapHandler from '../MapHandler';
+import Directions from './Directions';
 
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
-const Map = ({ coordinates, setCoordinates, setBounds, formik }) => {
+const Map = ({ routes, formik }) => {
   const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -30,13 +31,13 @@ const Map = ({ coordinates, setCoordinates, setBounds, formik }) => {
       <Box position="absolute" left={0} top={0} height="100%" width="100%">
         <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}>
           <MapComp
-            style={{ width: '100vw', height: '100vh' }}
+            style={{ width: '100vw', height: '100%' }}
             defaultCenter={center}
             defaultZoom={13}
             gestureHandling="greedy"
             disableDefaultUI={true}
+            fullScreenControl={false}
           />
-
           <MapControl position={ControlPosition.TOP_CENTER}>
             <Box p={3} borderRadius={1} m={4} bgcolor="white" boxShadow={2} zIndex={1}>
               <form onSubmit={formik.handleSubmit} noValidate>
@@ -77,6 +78,9 @@ const Map = ({ coordinates, setCoordinates, setBounds, formik }) => {
                 </Stack>
               </form>
             </Box>
+          </MapControl>
+          <MapControl position={ControlPosition.BOTTOM_LEFT}>
+            <Directions properties={routes} formik={formik} />
           </MapControl>
           <MapHandler place={selectedPlace} />
         </APIProvider>
