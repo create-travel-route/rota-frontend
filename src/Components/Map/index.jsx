@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Link, List, ListItem, Paper, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Stack } from '@mui/material';
 import MainButton from '../Button/MainButton';
 import { useTranslation } from 'react-i18next';
 import Input from '../Input';
@@ -8,16 +8,15 @@ import {
   APIProvider,
   Map as MapComp,
   ControlPosition,
-  MapControl,
-  useMap,
-  useMapsLibrary
+  MapControl
 } from '@vis.gl/react-google-maps';
 import PlacesAutocomplete from '../PlacesAutocomplete';
 import MapHandler from '../MapHandler';
+import Directions from './Directions';
 
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
-const Map = ({ routes, setRoutes, formik }) => {
+const Map = ({ routes, formik }) => {
   const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -81,7 +80,7 @@ const Map = ({ routes, setRoutes, formik }) => {
             </Box>
           </MapControl>
           <MapControl position={ControlPosition.BOTTOM_LEFT}>
-            <Directions routes={routes} setRoutes={setRoutes} />
+            <Directions properties={routes} formik={formik} />
           </MapControl>
           <MapHandler place={selectedPlace} />
         </APIProvider>
@@ -89,97 +88,5 @@ const Map = ({ routes, setRoutes, formik }) => {
     </Box>
   );
 };
-
-function Directions({ routes, setRoutes }) {
-  const { t } = useTranslation();
-  const map = useMap();
-  const routesLibrary = useMapsLibrary('routes');
-
-  const [directionsService, setDirectionsService] = useState();
-  const [directionsRenderer, setDirectionsRenderer] = useState();
-  const [routeIndex, setRouteIndex] = useState(0);
-  const selected = routes[routeIndex];
-  let leg = selected?.legs[0];
-
-  useEffect(() => {
-    if (!routesLibrary || !map) return;
-    setDirectionsService(new routesLibrary.DirectionsService());
-    setDirectionsRenderer(new routesLibrary.DirectionsRenderer({ map }));
-  }, [routesLibrary, map]);
-
-  // rota gelince düzeltilmeli
-  useEffect(() => {
-    if (!directionsService || !directionsRenderer) return;
-    directionsService
-      .route({
-        origin: 'İstanbul', //routes[0]?.address,
-        destination: 'Sakarya', //routes[routes.length - 1]?.address,
-        // waypoints: routes.slice(1, -1).map((route) => ({
-        //   location: route.address,
-        //   stopover: true
-        // })),
-        travelMode: window.google.maps.TravelMode.DRIVING,
-        provideRouteAlternatives: true
-      })
-      .then((response) => {
-        directionsRenderer.setDirections(response);
-        setRoutes(response.routes);
-      });
-  }, [directionsService, directionsRenderer]);
-
-  if (!leg) return null;
-
-  return (
-    <Paper
-      sx={{
-        p: 2,
-        bgcolor: 'white',
-        boxShadow: 2,
-        zIndex: 1,
-        borderRadius: 1,
-        mb: 2
-      }}>
-      <Typography
-        variant="h6"
-        sx={{
-          color: 'header.main',
-          fontWeight: 'bold'
-        }}>
-        {selected.summary}
-      </Typography>
-      <Typography variant="subtitle2">
-        {leg.start_address.split(',')[0]} - {leg.end_address.split(',')[0]}
-      </Typography>
-      <Typography variant="subtitle2">
-        {t('map.distance')}: {leg.distance?.text}
-      </Typography>
-      <Typography variant="subtitle2">
-        {t('map.duration')}: {leg.duration?.text}
-      </Typography>
-      <Typography
-        variant="body1"
-        sx={{
-          color: 'header.main',
-          fontWeight: 'bold',
-          mt: 1
-        }}>
-        {t('map.otherRoutes')}
-      </Typography>
-      <List dense={true}>
-        {routes.map((route, index) => (
-          <ListItem key={index} disablePadding href="#">
-            <Link
-              underline="hover"
-              component="button"
-              variant="body2"
-              onClick={() => setRouteIndex(index)}>
-              {route.summary}
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    </Paper>
-  );
-}
 
 export default Map;

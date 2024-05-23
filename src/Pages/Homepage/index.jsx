@@ -35,7 +35,7 @@ function Homepage() {
   return (
     <>
       <Box sx={{ flexGrow: 1, m: 2 }}>
-        <Map routes={routes} setRoutes={setRoutes} formik={formik} />
+        <Map routes={routes} formik={formik} />
       </Box>
       <ErrorPopup formik={formik} />
     </>
