@@ -11,6 +11,7 @@ import SecondaryButton from './Button/SecondaryButton';
 import TertiaryButton from './Button/TertiaryButton';
 import StateAlert from './StateAlert';
 import RateAndComment from './RateAndComment';
+import QuestionPopUp from './QuestionPopup';
 
 export {
   LanguageSwitcher,
@@ -25,5 +26,6 @@ export {
   SecondaryButton,
   TertiaryButton,
   StateAlert,
-  RateAndComment
+  RateAndComment,
+  QuestionPopUp
 };
