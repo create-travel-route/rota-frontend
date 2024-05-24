@@ -15,20 +15,36 @@ function Homepage() {
     initialValues: {
       departurePoint: null,
       arrivalPoint: null,
-      budget: ''
+      budget: '',
+      category: '',
+      comment: '',
+      point: ''
     },
     validationSchema: basicFormSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      await axios
-        .get(
-          `${ENDPOINTS.route}?lat1=${values.departurePoint?.lat}&lon1=${values.departurePoint?.lng}&lat2=${values.arrivalPoint?.lat}&lon2=${values.arrivalPoint?.lng}&budget=${values.budget}`
-        )
-        .then((response) => {
-          if (response) {
-            setRoutes(response.data);
-            setSubmitting(false);
-          }
-        });
+      const params = {
+        lat1: values.departurePoint?.lat,
+        lon1: values.departurePoint?.lng,
+        lat2: values.arrivalPoint?.lat,
+        lon2: values.arrivalPoint?.lng,
+        budget: values.budget,
+        category: values.category,
+        comment: values.comment,
+        point: values.point
+      };
+
+      const filteredParams = Object.fromEntries(Object.entries(params).filter(([_, v]) => v));
+
+      try {
+        const response = await axios.get(ENDPOINTS.route, { params: filteredParams });
+        if (response) {
+          setRoutes(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setSubmitting(false);
+      }
     }
   });
 

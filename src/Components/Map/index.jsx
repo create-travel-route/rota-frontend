@@ -13,12 +13,14 @@ import {
 import PlacesAutocomplete from '../PlacesAutocomplete';
 import MapHandler from '../MapHandler';
 import Directions from './Directions';
+import FilterPanel from '../FilterPanel';
 
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
 const Map = ({ routes, formik }) => {
   const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [openFilter, setOpenFilter] = useState(false);
 
   return (
     <Box
@@ -38,6 +40,9 @@ const Map = ({ routes, formik }) => {
             disableDefaultUI={true}
             fullScreenControl={false}
           />
+          <MapControl position={ControlPosition.RIGHT_BOTTOM}>
+            <FilterPanel formik={formik} drawerOpen={openFilter} setDrawerOpen={setOpenFilter} />
+          </MapControl>
           <MapControl position={ControlPosition.TOP_CENTER}>
             <Box p={3} borderRadius={1} m={4} bgcolor="white" boxShadow={2} zIndex={1}>
               <form onSubmit={formik.handleSubmit} noValidate>
