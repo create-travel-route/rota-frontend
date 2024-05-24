@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Box, MenuItem, Typography, Grid, Container, Stack } from '@mui/material';
 import { Category } from '../../Constants/Category';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,14 @@ import {
   useMarkerRef,
   useMapsLibrary
 } from '@vis.gl/react-google-maps';
-import { ErrorPopup, Input, MainButton, MapHandler, PlacesAutocomplete } from '../../Components';
+import {
+  ErrorPopup,
+  Input,
+  MainButton,
+  MapHandler,
+  PlacesAutocomplete,
+  QuestionPopUp
+} from '../../Components';
 import useRequest from '../../Hooks/useRequest';
 import ENDPOINTS from '../../Constants/Endpoints';
 
@@ -27,7 +34,8 @@ const CreatePropertyPage = ({ isUpdate }) => {
   const [markerRef] = useMarkerRef();
 
   const { id } = useParams();
-  const { createData, updateData, useGetData } = useRequest();
+  const questionPopupRef = useRef();
+  const { createData, updateData, useGetData, deleteData } = useRequest();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -86,7 +94,7 @@ const CreatePropertyPage = ({ isUpdate }) => {
   });
 
   useEffect(() => {
-    if (property) {
+    if (property && isUpdate) {
       formik.setValues({
         title: property.title,
         description: property.description,
@@ -117,6 +125,19 @@ const CreatePropertyPage = ({ isUpdate }) => {
         setSelectedPlace(address);
       });
     }, [geocoder]);
+  };
+
+  const handleDelete = async () => {
+    await deleteData.mutateAsync(
+      {
+        endpoint: `${ENDPOINTS.properties}/${id}`
+      },
+      {
+        onSuccess: async () => {
+          navigate('/properties');
+        }
+      }
+    );
   };
 
   return (
@@ -226,10 +247,18 @@ const CreatePropertyPage = ({ isUpdate }) => {
                 {isUpdate ? t('button.updateProperty') : t('button.createProperty')}
               </MainButton>
             </Grid>
+            {isUpdate && (
+              <Grid item xs={12} md={3}>
+                <MainButton color="error" onClick={() => questionPopupRef?.current?.openDialog()}>
+                  {t('button.delete')}
+                </MainButton>
+              </Grid>
+            )}
           </Grid>
         </form>
       </Container>
       <ErrorPopup formik={formik} />
+      <QuestionPopUp ref={questionPopupRef} yesClick={handleDelete} />
     </Stack>
   );
 };

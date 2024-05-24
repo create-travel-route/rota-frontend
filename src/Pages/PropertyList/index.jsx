@@ -13,13 +13,14 @@ import {
   Avatar,
   Typography
 } from '@mui/material';
-import { Museum, Nightlife, Restaurant, ShoppingBag, SportsTennis } from '@mui/icons-material';
+import { Add, Museum, Nightlife, Restaurant, ShoppingBag, SportsTennis } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import useRequest from '../../Hooks/useRequest';
 import ENDPOINTS from '../../Constants/Endpoints';
 import { Category } from '../../Constants/Category';
+import { MainButton } from '../../Components';
 
 const categoryIcons = {
   [Category.EatAndDrink]: <Restaurant />,
@@ -60,6 +61,17 @@ function PropertyList() {
           gutterBottom>
           {t('navbar.properties')}
         </Typography>
+        <Stack direction="row" spacing={2} justifyContent="flex-end" alignItems="center">
+          <MainButton
+            sx={{
+              width: 'auto'
+            }}
+            color="success"
+            startIcon={<Add />}
+            onClick={() => navigate('/create-property')}>
+            {t('button.createProperty')}
+          </MainButton>
+        </Stack>
         <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper', mt: 2 }}>
           {properties?.map((property) => (
             <React.Fragment key={property.id}>
