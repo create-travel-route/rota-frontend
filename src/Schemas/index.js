@@ -18,7 +18,11 @@ export const basicFormSchema = yup.object().shape({
     .nullable()
     .required(<Trans i18nKey="validation.arrivalPoint.required" />),
 
-  budget: yup.number().min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />)
+  budget: yup.number().min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />),
+
+  category: yup.string(),
+  comment: yup.number().min(0),
+  point: yup.number().min(0).max(5)
 });
 
 export const registerSchema = yup.object().shape({

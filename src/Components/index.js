@@ -12,6 +12,7 @@ import TertiaryButton from './Button/TertiaryButton';
 import StateAlert from './StateAlert';
 import RateAndComment from './RateAndComment';
 import QuestionPopUp from './QuestionPopup';
+import FilterPanel from './FilterPanel';
 
 export {
   LanguageSwitcher,
@@ -27,5 +28,6 @@ export {
   TertiaryButton,
   StateAlert,
   RateAndComment,
-  QuestionPopUp
+  QuestionPopUp,
+  FilterPanel
 };

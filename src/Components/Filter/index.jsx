@@ -14,7 +14,8 @@ const Filter = ({ children, title }) => {
           color: 'header.main',
           fontWeight: 600,
           textAlign: 'start',
-          fontSize: '16px'
+          fontSize: '16px',
+          mb: 2
         }}
         variant="subtitle1">
         {title}
