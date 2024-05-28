@@ -10,8 +10,13 @@ import { useFormik } from 'formik';
 import { rateAndCommentSchema } from '../../Schemas';
 import LikeImage from '../../Image/thumbs-up_5223658.png';
 import ErrorPopup from '../ErrorPopup';
-const RateAndComment = ({ handleClose, open }) => {
+import useRequest from '../../Hooks/useRequest';
+import ENDPOINTS from '../../Constants/Endpoints';
+
+const RateAndComment = ({ handleClose, open, propertyId }) => {
   const { t } = useTranslation();
+  const { createData } = useRequest();
+
   const formik = useFormik({
     initialValues: {
       rate: 0,
@@ -19,7 +24,21 @@ const RateAndComment = ({ handleClose, open }) => {
     },
     validationSchema: rateAndCommentSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      await createData.mutateAsync(
+        {
+          endpoint: `${ENDPOINTS.properties}/${propertyId}/review`,
+          body: {
+            comment: values.comment,
+            rating: values.rate
+          }
+        },
+        {
+          onSuccess: async () => {
+            handleClose();
+            await formik.resetForm();
+          }
+        }
+      );
     }
   });
 

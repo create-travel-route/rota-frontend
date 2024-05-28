@@ -13,6 +13,7 @@ import StateAlert from './StateAlert';
 import RateAndComment from './RateAndComment';
 import QuestionPopUp from './QuestionPopup';
 import FilterPanel from './FilterPanel';
+import RoutePanel from './RoutePanel';
 
 export {
   LanguageSwitcher,
@@ -29,5 +30,6 @@ export {
   StateAlert,
   RateAndComment,
   QuestionPopUp,
-  FilterPanel
+  FilterPanel,
+  RoutePanel
 };

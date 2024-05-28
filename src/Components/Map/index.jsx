@@ -3,7 +3,6 @@ import { Box, Stack } from '@mui/material';
 import MainButton from '../Button/MainButton';
 import { useTranslation } from 'react-i18next';
 import Input from '../Input';
-
 import {
   APIProvider,
   Map as MapComp,
@@ -14,6 +13,7 @@ import PlacesAutocomplete from '../PlacesAutocomplete';
 import MapHandler from '../MapHandler';
 import Directions from './Directions';
 import FilterPanel from '../FilterPanel';
+import RoutePanel from '../RoutePanel';
 
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
@@ -21,6 +21,7 @@ const Map = ({ routes, formik }) => {
   const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [openFilter, setOpenFilter] = useState(false);
+  const [openRoute, setOpenRoute] = useState(false);
 
   return (
     <Box
@@ -40,9 +41,19 @@ const Map = ({ routes, formik }) => {
             disableDefaultUI={true}
             fullScreenControl={false}
           />
+
           <MapControl position={ControlPosition.RIGHT_BOTTOM}>
-            <FilterPanel formik={formik} drawerOpen={openFilter} setDrawerOpen={setOpenFilter} />
+            <Box>
+              <RoutePanel properties={routes} drawerOpen={openRoute} setDrawerOpen={setOpenRoute} />
+            </Box>
           </MapControl>
+
+          <MapControl position={ControlPosition.RIGHT_BOTTOM}>
+            <Box mb={1}>
+              <FilterPanel formik={formik} drawerOpen={openFilter} setDrawerOpen={setOpenFilter} />
+            </Box>
+          </MapControl>
+
           <MapControl position={ControlPosition.TOP_CENTER}>
             <Box p={3} borderRadius={1} m={4} bgcolor="white" boxShadow={2} zIndex={1}>
               <form onSubmit={formik.handleSubmit} noValidate>
