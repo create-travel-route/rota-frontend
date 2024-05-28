@@ -85,6 +85,7 @@
   "stateAlert.text.deleteSuccess": "Başarıyla silindi.",
   "stateAlert.text.registerSuccess": "Üyeliğiniz başarıyla oluşturuldu! Şimdi giriş yapın ve yolculuğunuza başlayın.",
   "filterPanel.button.title": "Gelişmiş Filtreleme",
+  "routePanel.button.title":"Rotayı Değerlendir",
   "filter.point": "Puan",
   "filter.comment": "Yorum",
   "validation.departurePoint.required": "'Nereden' alanından bir konum seçilmesi zorunludur!",

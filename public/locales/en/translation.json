@@ -85,6 +85,7 @@
   "stateAlert.text.deleteSuccess": "Deleted succesfully.",
   "stateAlert.text.registerSuccess": "Your registration is successfully completed! Log in now and begin your journey.",
   "filterPanel.button.title": "Advanced Filtering",
+  "routePanel.button.title":"Review Route",
   "filter.point": "Point",
   "filter.comment": "Comment",
   "validation.departurePoint.required": "Selecting a location from the 'Departure Point' field is required!",
