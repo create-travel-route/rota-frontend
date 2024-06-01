@@ -1,5 +1,5 @@
 import { PERMISSIONS } from '../Constants/Permissions';
-import { CreatePropertyPage, Profile } from '../Pages';
+import { CreatePropertyPage, Profile, PropertyDetail, PropertyList } from '../Pages';
 
 export const routes = [
   {
@@ -17,5 +17,15 @@ export const routes = [
     path: '/profile',
     element: Profile,
     permissions: [PERMISSIONS.PROFILE]
+  },
+  {
+    path: '/properties',
+    element: PropertyList,
+    permissions: [PERMISSIONS.PROPERTIES]
+  },
+  {
+    path: '/properties/:id',
+    element: PropertyDetail,
+    permissions: [PERMISSIONS.PROPERTY_DETAIL]
   }
 ];

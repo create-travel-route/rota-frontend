@@ -14,6 +14,7 @@ import MapHandler from '../MapHandler';
 import Directions from './Directions';
 import FilterPanel from '../FilterPanel';
 import RoutePanel from '../RoutePanel';
+import useAuth from '../../Hooks/useAuth';
 
 const center = { lat: 40.77264639690838, lng: 30.392697210479174 };
 
@@ -22,6 +23,7 @@ const Map = ({ routes, formik }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [openFilter, setOpenFilter] = useState(false);
   const [openRoute, setOpenRoute] = useState(false);
+  const { loggedIn } = useAuth();
 
   return (
     <Box
@@ -42,11 +44,17 @@ const Map = ({ routes, formik }) => {
             fullScreenControl={false}
           />
 
-          <MapControl position={ControlPosition.RIGHT_BOTTOM}>
-            <Box>
-              <RoutePanel properties={routes} drawerOpen={openRoute} setDrawerOpen={setOpenRoute} />
-            </Box>
-          </MapControl>
+          {loggedIn && (
+            <MapControl position={ControlPosition.RIGHT_BOTTOM}>
+              <Box>
+                <RoutePanel
+                  properties={routes}
+                  drawerOpen={openRoute}
+                  setDrawerOpen={setOpenRoute}
+                />
+              </Box>
+            </MapControl>
+          )}
 
           <MapControl position={ControlPosition.RIGHT_BOTTOM}>
             <Box mb={1}>

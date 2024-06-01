@@ -9,7 +9,9 @@ export const ROLES = {
 export const PERMISSIONS = {
   CREATE_PROPERTY: 'can_create_property',
   UPDATE_PROPERTY: 'can_update_property',
-  PROFILE: 'can_view_profile'
+  PROFILE: 'can_view_profile',
+  PROPERTIES: 'can_view_properties',
+  PROPERTY_DETAIL: 'can_view_property_detail'
 };
 
 // kullanici izinleri eklenir
