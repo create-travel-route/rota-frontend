@@ -23,11 +23,31 @@ import { Category } from '../../Constants/Category';
 import { MainButton } from '../../Components';
 
 const categoryIcons = {
-  [Category.EatAndDrink]: <Restaurant />,
-  [Category.Historical]: <Museum />,
-  [Category.Entertainment]: <Nightlife />,
-  [Category.Sport]: <SportsTennis />,
-  [Category.Shopping]: <ShoppingBag />
+  [Category.EatAndDrink]: (
+    <Avatar sx={{ backgroundColor: 'rgb(255, 99, 71)' }}>
+      <Restaurant />
+    </Avatar>
+  ),
+  [Category.Historical]: (
+    <Avatar sx={{ backgroundColor: 'rgb(60, 179, 113)' }}>
+      <Museum />
+    </Avatar>
+  ),
+  [Category.Entertainment]: (
+    <Avatar sx={{ backgroundColor: 'rgb(138, 43, 226)' }}>
+      <Nightlife />
+    </Avatar>
+  ),
+  [Category.Sport]: (
+    <Avatar sx={{ backgroundColor: 'rgb(255, 165, 0)' }}>
+      <SportsTennis />
+    </Avatar>
+  ),
+  [Category.Shopping]: (
+    <Avatar sx={{ backgroundColor: 'rgb(255, 20, 147)' }}>
+      <ShoppingBag />
+    </Avatar>
+  )
 };
 
 function PropertyList() {
@@ -44,8 +64,6 @@ function PropertyList() {
       enabled: !!user
     }
   );
-
-  console.log(properties);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -104,7 +122,13 @@ function PropertyList() {
                               {property.address}
                             </Typography>
                           </Stack>
-                          <Rating name="read-only" size="small" value={property.rating} readOnly />
+                          <Rating
+                            name="read-only"
+                            size="small"
+                            value={property.rating}
+                            readOnly
+                            precision={0.5}
+                          />
                         </Stack>
                       </React.Fragment>
                     }

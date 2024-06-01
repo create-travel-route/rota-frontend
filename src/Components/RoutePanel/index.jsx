@@ -10,7 +10,7 @@ import {
   Avatar,
   ListItemText
 } from '@mui/material';
-import { Tune } from '@mui/icons-material';
+import { Star } from '@mui/icons-material';
 import MainButton from '../Button/MainButton';
 import SecondaryButton from '../Button/SecondaryButton';
 import { useTranslation } from 'react-i18next';
@@ -72,7 +72,10 @@ const RoutePanel = ({ properties, drawerOpen, setDrawerOpen }) => {
     <>
       <Box sx={{ px: '48px' }}>
         <Stack>
-          <SecondaryButton onClick={handleDrawerOpen} startIcon={<Tune />}>
+          <SecondaryButton
+            onClick={handleDrawerOpen}
+            startIcon={<Star />}
+            disabled={properties?.length === 0}>
             {t('routePanel.button.title')}
           </SecondaryButton>
         </Stack>

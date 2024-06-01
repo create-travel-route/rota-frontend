@@ -79,6 +79,8 @@
   "roles.Admin": "Admin",
   "roles.Guest": "Guest",
   "profile.createdDate": "Created Date: ",
+  "propertyDetail.createdDate": "Created Date: ",
+  "propertyDetail.reviews": "Reviews",
   "stateAlert.title.success": "Success",
   "stateAlert.text.savedSuccess": "Saved successfully.",
   "stateAlert.text.updateSuccess": "Updated successfully.",

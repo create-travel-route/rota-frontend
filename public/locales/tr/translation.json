@@ -76,6 +76,8 @@
   "roles.Admin": "Admin",
   "roles.Guest": "Misafir",
   "profile.createdDate": "Hesap Oluşturulma Tarihi: ",
+  "propertyDetail.createdDate": "Mekan Oluşturulma Tarihi: ",
+  "propertyDetail.reviews": "Değerlendirmeler",
   "map.distance": "Mesafe",
   "map.duration": "Süre",
   "map.otherRoutes": "Diğer Rotalar",
