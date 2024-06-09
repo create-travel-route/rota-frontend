@@ -67,7 +67,7 @@ export const createPropertySchema = yup.object().shape({
 
   budget: yup
     .number()
-    .min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />)
+    //.min(1, <Trans i18nKey="validation.minValue.budget" values={{ min: 1 }} />)
     .required(<Trans i18nKey="validation.budget.required" />),
 
   category: yup.string().required(<Trans i18nKey="validation.category.required" />),

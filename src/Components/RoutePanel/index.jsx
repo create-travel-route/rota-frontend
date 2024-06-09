@@ -10,7 +10,7 @@ import {
   Avatar,
   ListItemText
 } from '@mui/material';
-import { Star } from '@mui/icons-material';
+import { Park, Star } from '@mui/icons-material';
 import MainButton from '../Button/MainButton';
 import SecondaryButton from '../Button/SecondaryButton';
 import { useTranslation } from 'react-i18next';
@@ -43,6 +43,11 @@ const categoryIcons = {
   [Category.Shopping]: (
     <Avatar sx={{ backgroundColor: 'rgb(255, 20, 147)' }}>
       <ShoppingBag />
+    </Avatar>
+  ),
+  [Category.Nature]: (
+    <Avatar sx={{ backgroundColor: 'rgb(139,195,74)' }}>
+      <Park />
     </Avatar>
   )
 };
@@ -94,27 +99,46 @@ const RoutePanel = ({ properties, drawerOpen, setDrawerOpen }) => {
               height: '100%'
             }}>
             <Stack spacing={2}>
-              {properties.map((property, index) => (
-                <List
-                  key={property.id}
-                  sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                  <ListItem
-                    onClick={() => {
-                      index === 0 || index === properties.length - 1
-                        ? null
-                        : handleButtonClick(property.id);
-                    }}
-                    sx={{ cursor: 'pointer' }}>
-                    <ListItemAvatar>
-                      {categoryIcons[property.category] ?? <LocationOnIcon color="error" />}
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={property.title.toUpperCase()}
-                      secondary={`${t(' input.budget ')} : ${property.budget} TL`}
-                    />
-                  </ListItem>
-                </List>
-              ))}
+              {properties
+                .slice()
+                .sort((a, b) => {
+                  if (a.title.startsWith('Başlangıç') && !b.title.startsWith('Başlangıç')) {
+                    return -1; // Move items starting with 'start' to the beginning
+                  } else if (!a.title.startsWith('Başlangıç') && b.title.startsWith('Başlangıç')) {
+                    return 1; // Move items not starting with 'start' to the end
+                  } else if (a.title.endsWith('Bitiş') && !b.title.endsWith('Bitiş')) {
+                    return 1; // Move items ending with 'end' to the end
+                  } else if (!a.title.endsWith('Bitiş') && b.title.endsWith('Bitiş')) {
+                    return -1; // Move items not ending with 'end' to the beginning
+                  } else {
+                    return 0; // Maintain original order for other items
+                  }
+                })
+                .map((property, index) => (
+                  <List
+                    key={property.id}
+                    sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    <ListItem
+                      onClick={() => {
+                        index === 0 || index === properties.length - 1
+                          ? null
+                          : handleButtonClick(property.id);
+                      }}
+                      sx={{ cursor: 'pointer' }}>
+                      <ListItemAvatar>
+                        {categoryIcons[property.category] ?? <LocationOnIcon color="error" />}
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={property.title}
+                        secondary={
+                          index === 0 || index === properties.length - 1
+                            ? null
+                            : `${t('input.budget')} : ${property.budget} TL`
+                        }
+                      />
+                    </ListItem>
+                  </List>
+                ))}
             </Stack>
             <MainButton
               onClick={() => {

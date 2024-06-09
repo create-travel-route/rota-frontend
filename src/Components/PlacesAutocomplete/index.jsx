@@ -5,7 +5,6 @@ import { LocationOn } from '@mui/icons-material';
 import Input from '../Input';
 import parse from 'autosuggest-highlight/parse';
 import { useTranslation } from 'react-i18next';
-import { set } from 'date-fns';
 
 const PlacesAutocomplete = ({ onPlaceSelect, ...props }) => {
   const map = useMap();
@@ -89,6 +88,7 @@ const PlacesAutocomplete = ({ onPlaceSelect, ...props }) => {
       };
 
       placesService?.getDetails(detailRequestOptions, detailsRequestCallback);
+      setPredictionResults([]);
     },
     [onPlaceSelect, places, placesService, sessionToken]
   );
@@ -97,7 +97,12 @@ const PlacesAutocomplete = ({ onPlaceSelect, ...props }) => {
     <Stack>
       <Autocomplete
         id="google-map-demo"
-        sx={{ width: 300 }}
+        sx={{
+          width: 300,
+          '& .MuiAutocomplete-noOptions': {
+            display: 'none'
+          }
+        }}
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
         filterOptions={(x) => x}
         options={predictionResults}
@@ -114,6 +119,7 @@ const PlacesAutocomplete = ({ onPlaceSelect, ...props }) => {
             props.setLatLng(null);
           }
         }}
+        disableCloseOnSelect={true}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}

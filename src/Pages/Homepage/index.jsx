@@ -29,11 +29,13 @@ function Homepage() {
         lon2: values.arrivalPoint?.lng,
         budget: values.budget,
         category: values.category,
-        comment: values.comment,
-        point: values.point
+        review: values.comment,
+        rating: values.point
       };
 
-      const filteredParams = Object.fromEntries(Object.entries(params).filter(([_, v]) => v));
+      const filteredParams = Object.fromEntries(
+        Object.entries(params).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+      );
 
       try {
         const response = await axios.get(ENDPOINTS.route, { params: filteredParams });

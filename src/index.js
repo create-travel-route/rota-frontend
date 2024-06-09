@@ -40,7 +40,6 @@ root.render(
             </RequestProvider>
           </AuthProvider>
         </LocalizationProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>
   </CacheProvider>

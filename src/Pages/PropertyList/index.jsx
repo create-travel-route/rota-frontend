@@ -13,7 +13,15 @@ import {
   Avatar,
   Typography
 } from '@mui/material';
-import { Add, Museum, Nightlife, Restaurant, ShoppingBag, SportsTennis } from '@mui/icons-material';
+import {
+  Add,
+  Museum,
+  Nightlife,
+  Park,
+  Restaurant,
+  ShoppingBag,
+  SportsTennis
+} from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
@@ -46,6 +54,11 @@ const categoryIcons = {
   [Category.Shopping]: (
     <Avatar sx={{ backgroundColor: 'rgb(255, 20, 147)' }}>
       <ShoppingBag />
+    </Avatar>
+  ),
+  [Category.Nature]: (
+    <Avatar sx={{ backgroundColor: 'rgb(139,195,74)' }}>
+      <Park />
     </Avatar>
   )
 };

@@ -24,10 +24,12 @@ const Directions = ({ properties, formik }) => {
   useEffect(() => {
     if (!directionsService || !directionsRenderer || properties?.length === 0) return;
 
-    const waypoints = properties.slice(1, -1).map((route) => ({
-      location: route.address,
-      stopover: true
-    }));
+    const waypoints = properties
+      .filter((route) => route.title !== 'Başlangıç' && route.title !== 'Bitiş')
+      .map((route) => ({
+        location: route.address,
+        stopover: true
+      }));
 
     directionsService
       .route({
@@ -90,7 +92,7 @@ const Directions = ({ properties, formik }) => {
         {t('map.otherRoutes')}
       </Typography>
       <List dense={true}>
-        {routes.map((route, index) => (
+        {routes?.map((route, index) => (
           <ListItem key={index} disablePadding>
             <Link
               underline="hover"

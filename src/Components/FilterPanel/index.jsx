@@ -72,7 +72,7 @@ const FilterPanel = ({ formik, drawerOpen, setDrawerOpen }) => {
                 name="radio-buttons-group"
                 value={formik.values.comment}
                 onChange={(_, newValue) => formik.setFieldValue('comment', Number(newValue))}>
-                <FormControlLabel value={0} control={<Radio />} label="0" />
+                <FormControlLabel value={0} control={<Radio />} label="0-4" />
                 <FormControlLabel value={1} control={<Radio />} label="5-10" />
                 <FormControlLabel value={2} control={<Radio />} label="10+" />
                 <FormControlLabel value={3} control={<Radio />} label="20+" />
@@ -97,13 +97,27 @@ const FilterPanel = ({ formik, drawerOpen, setDrawerOpen }) => {
               ))}
             </Input>
           </Filter>
-          <MainButton
-            onClick={() => {
-              formik.handleSubmit();
-              handleDrawerClose();
-            }}>
-            {t('button.createRoute')}
-          </MainButton>
+          <Stack direction="row" spacing={2}>
+            <MainButton
+              color="error"
+              onClick={() => {
+                formik.setValues({
+                  ...formik.values,
+                  category: '',
+                  comment: '',
+                  point: ''
+                });
+              }}>
+              {t('common.clear')}
+            </MainButton>
+            <MainButton
+              onClick={() => {
+                formik.handleSubmit();
+                handleDrawerClose();
+              }}>
+              {t('button.createRoute')}
+            </MainButton>
+          </Stack>
         </Box>
       </Drawer>
     </Box>

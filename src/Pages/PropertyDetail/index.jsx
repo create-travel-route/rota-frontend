@@ -17,7 +17,14 @@ import { useTranslation } from 'react-i18next';
 import useRequest from '../../Hooks/useRequest';
 import ENDPOINTS from '../../Constants/Endpoints';
 import { Category } from '../../Constants/Category';
-import { Museum, Nightlife, Restaurant, ShoppingBag, SportsTennis } from '@mui/icons-material';
+import {
+  Museum,
+  Nightlife,
+  Park,
+  Restaurant,
+  ShoppingBag,
+  SportsTennis
+} from '@mui/icons-material';
 import dayjs from 'dayjs';
 import { MainButton, QuestionPopUp } from '../../Components';
 import useAuth from '../../Hooks/useAuth';
@@ -47,6 +54,11 @@ const categoryIcons = {
   [Category.Shopping]: (
     <Avatar sx={{ backgroundColor: 'rgb(255, 20, 147)', width: 120, height: 120 }}>
       <ShoppingBag />
+    </Avatar>
+  ),
+  [Category.Nature]: (
+    <Avatar sx={{ backgroundColor: 'rgb(139,195,74)', width: 120, height: 120 }}>
+      <Park />
     </Avatar>
   )
 };
